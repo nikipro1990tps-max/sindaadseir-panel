@@ -105,8 +105,9 @@
     "unlock_cover": "باز کردن قفل کاور",
     "recover_id_cover": "بازیابی شناسه کاور",
     "supports": "پشتیبانی",
-    "login": "ورود",
     "lockscreen": "صفحه قفل",
+    
+    "login": "ورود",
     "email": "ایمیل",
     "mobile": "موبایل",
     "enter_your_email_or_mobile": "ایمیل یا شماره همراه خود را وارد کنید",
@@ -116,6 +117,7 @@
     "password": "رمز عبور",
     "password_recovery": "بازیابی رمز عبور",
     "register": "ثبت‌نام",
+
     "404": "۴۰۴",
     "500": "۵۰۰",
     "503": "۵۰۳",

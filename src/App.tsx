@@ -17,7 +17,7 @@ function App({ children }: PropsWithChildren) {
         dispatch(toggleRTL(localStorage.getItem('rtlClass') || themeConfig.rtlClass));
         dispatch(toggleAnimation(localStorage.getItem('animation') || themeConfig.animation));
         dispatch(toggleNavbar(localStorage.getItem('navbar') || themeConfig.navbar));
-        dispatch(toggleLocale(localStorage.getItem('i18nextLng') || themeConfig.locale));
+        dispatch(toggleLocale('fa-IR'/*localStorage.getItem('i18nextLng') || themeConfig.locale*/));
         dispatch(toggleSemidark(localStorage.getItem('semidark') || themeConfig.semidark));
     }, [dispatch, themeConfig.theme, themeConfig.menu, themeConfig.layout, themeConfig.rtlClass, themeConfig.animation, themeConfig.navbar, themeConfig.locale, themeConfig.semidark]);
 

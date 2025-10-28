@@ -1,8 +1,6 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { IRootState } from '../store';
+import { useSelector, useDispatch } from 'react-redux';
 import { FormEvent, useEffect, useState } from 'react';
-import { setPageTitle, toggleRTL } from '../store/themeConfigSlice';
+import { setPageTitle } from '../store/themeConfigSlice';
 import { useTranslation } from 'react-i18next';
 import InputLabel from '../components/Elements/InputLabel';
 import InputLabelPassword from '../components/Elements/InputLabelPassword';
@@ -18,13 +16,11 @@ interface LoginStateItems {
 
 const LoginPage = () => {
 
-    const navigate = useNavigate();
     const dispatch = useDispatch()
-    const isLogin = useSelector((state: IRootState) => state.appConfig.isLogin);
     const { t } = useTranslation()
-    const isDark = useSelector((state: IRootState) => state.themeConfig.theme === 'dark' || state.themeConfig.isDarkMode);
-    const isRtl = useSelector((state: IRootState) => state.themeConfig.rtlClass) === 'rtl' ? true : false;
-    const themeConfig = useSelector((state: IRootState) => state.themeConfig);
+    // const isDark = useSelector((state: IRootState) => state.themeConfig.theme === 'dark' || state.themeConfig.isDarkMode);
+    // const isRtl = useSelector((state: IRootState) => state.themeConfig.rtlClass) === 'rtl' ? true : false;
+    // const themeConfig = useSelector((state: IRootState) => state.themeConfig);
     const [state, setState] = useState<LoginStateItems>({ identifier: null, password: null });
     // const setLocale = (flag: string) => {
     //     setFlag(flag);

@@ -41,7 +41,7 @@ const initialState = {
     rtlClass: localStorage.getItem('rtlClass') || themeConfig.rtlClass,
     animation: localStorage.getItem('animation') || themeConfig.animation,
     navbar: localStorage.getItem('navbar') || themeConfig.navbar,
-    locale: 'fa', // localStorage.getItem('i18nextLng') || themeConfig.locale,
+    locale: localStorage.getItem('i18nextLng') || themeConfig.locale,
     isDarkMode: false,
     sidebar: localStorage.getItem('sidebar') || defaultState.sidebar,
     semidark: localStorage.getItem('semidark') || themeConfig.semidark,
