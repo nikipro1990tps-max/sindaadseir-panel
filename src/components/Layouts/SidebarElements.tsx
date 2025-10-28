@@ -69,8 +69,6 @@ const SidebarElements: React.FC<SidebarElementsProps> = (props) => {
         }
     ];
 
-    console.log(9999999999, SideBarItems)
-
 
     const hasChildren = (item: SidebarItem): item is SidebarItem & { children: SidebarChildItem[] } => {
         return !!item.children && item.children.length > 0;
