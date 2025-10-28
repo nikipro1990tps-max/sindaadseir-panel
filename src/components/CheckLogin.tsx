@@ -19,7 +19,6 @@ const CheckLogin = ({ children }: PropsWithChildren) => {
 
             if (response?.user) {
                 dispatch(changeUserData(response.user));
-                MyToast.success("hello");
             }
 
         } catch (error) {
