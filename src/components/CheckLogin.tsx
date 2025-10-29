@@ -2,10 +2,9 @@ import { Fragment, PropsWithChildren, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom'; // Import useLocation
 import { IRootState } from '../store';
-import { changeUserData, setLogin } from '../store/appConfigSlice';
+import { changeUserData, logout, setLogin } from '../store/appConfigSlice';
 import { authApiService } from '../api/services/auth.api';
 import LoginPage from '../pages/LoginPage';
-import { MyToast } from './Elements/MyToast';
 
 const CheckLogin = ({ children }: PropsWithChildren) => {
     const isLogin = useSelector((state: IRootState) => state.appConfig.isLogin);
@@ -21,11 +20,14 @@ const CheckLogin = ({ children }: PropsWithChildren) => {
                 dispatch(changeUserData(response.user));
             }
 
+
+
         } catch (error) {
+
             console.error('Login check failed:', error);
             // Clear any invalid tokens
-            localStorage.removeItem('token');
-            dispatch(changeUserData(null));
+            dispatch(logout());
+
         }
     }
 

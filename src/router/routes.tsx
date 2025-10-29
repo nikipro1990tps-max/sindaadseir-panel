@@ -4,7 +4,8 @@ const Analytics = lazy(() => import('../pages/test1'));
 const Sales = lazy(() => import('../pages/test2'));
 const Chat = lazy(() => import('../pages/test3'));
 
-const routes = [
+
+const routes= [
     // dashboard
     {
         name: 'dashboard',
@@ -17,11 +18,14 @@ const routes = [
         name: 'analytics',
         path: '/analytics',
         element: <Analytics />,
+        permissions: ["ad"],
+
     },
     {
         name: 'sales',
         path: '/sales',
         element: <Sales />,
+        permissions: ["user-list"],
     },
     {
         name: 'chat',
@@ -31,8 +35,8 @@ const routes = [
 
 ];
 
-const findRouteByName = (name : string) : string => {
-    return routes.find(x => x.name == name)?.path || ""
+const findRouteByName = (name: string)  => {
+    return routes.find(x => x.name == name) || {}
 }
 
 export { routes, findRouteByName };

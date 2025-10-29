@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
 import { toggleSidebar } from '../../store/themeConfigSlice';
 import { IRootState } from '../../store';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import IconCaretsDown from '../Icon/IconCaretsDown';
 import SidebarElements from './SidebarElements';
 
@@ -68,10 +68,14 @@ const Sidebar = () => {
                     </div>
 
                     <PerfectScrollbar className="h-[calc(100vh-80px)] relative">
-                        <SidebarElements
-                            toggleMenu={toggleMenu}
-                            currentMenu={currentMenu}
-                        />
+                        <Suspense>
+
+                            <SidebarElements
+                                toggleMenu={toggleMenu}
+                                currentMenu={currentMenu}
+                            />
+                        </Suspense>
+
                     </PerfectScrollbar>
 
                 </div>

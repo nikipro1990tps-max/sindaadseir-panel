@@ -8,7 +8,7 @@ const defaultState = {
 const initialState = {
 
     user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user') as string) : defaultState.user,
-    isLogin: !!defaultState.user,
+    isLogin: !!localStorage.getItem('user'),
 
 }
 
@@ -17,15 +17,27 @@ const appConfigSlice = createSlice({
     initialState: initialState,
     reducers: {
 
+        setLogin(state, { payload }) {
+            state.isLogin = payload
+        },
+
         changeUserData(state, { payload }) {
             payload = payload || state.user; // full, boxed-layout
             localStorage.setItem('user', payload ? JSON.stringify(payload) : "");
-            state.isLogin = !!payload
+            // const hasToken = !!localStorage.getItem('token')
+            state.user = payload
+            state.isLogin = !!payload 
         },
+
+        logout(state){
+            state.isLogin = false
+            localStorage.removeItem("uesr")
+            localStorage.removeItem("token")
+        }
     }
 
 })
 
-export const { setLogin, changeUserData } = appConfigSlice.actions;
+export const { setLogin, changeUserData,logout } = appConfigSlice.actions;
 
 export default appConfigSlice.reducer;

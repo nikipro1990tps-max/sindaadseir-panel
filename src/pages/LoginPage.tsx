@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { FormEvent, useEffect, useState } from 'react';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { setPageTitle } from '../store/themeConfigSlice';
 import { useTranslation } from 'react-i18next';
 import InputLabel from '../components/Elements/InputLabel';
@@ -15,6 +16,8 @@ interface LoginStateItems {
 }
 
 const LoginPage = () => {
+
+    const navigate = useNavigate();
 
     const dispatch = useDispatch()
     const { t } = useTranslation()
