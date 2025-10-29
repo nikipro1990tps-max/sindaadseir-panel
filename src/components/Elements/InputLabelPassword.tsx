@@ -4,7 +4,7 @@ import IconPencil from "../Icon/IconPencil"
 import IconX from "../Icon/IconX"
 
 interface InputLabelPasswordProps {
-    value?: string;
+    value?: string | null;
     label?: string;
     placeholder?: string;
     onChange?: (value: string) => void;

@@ -20,7 +20,7 @@ const LoginPage = () => {
     const navigate = useNavigate();
 
     const dispatch = useDispatch()
-    const { t } = useTranslation()
+    const { t } = useTranslation(["auth"])
     // const isDark = useSelector((state: IRootState) => state.themeConfig.theme === 'dark' || state.themeConfig.isDarkMode);
     // const isRtl = useSelector((state: IRootState) => state.themeConfig.rtlClass) === 'rtl' ? true : false;
     // const themeConfig = useSelector((state: IRootState) => state.themeConfig);
@@ -125,16 +125,16 @@ const LoginPage = () => {
                             <form className="space-y-5 dark:text-white" onSubmit={submitForm}>
                                 <InputLabel
                                     value={state.identifier}
-                                    label={t("enter_your_email_or_mobile")}
-                                    placeholder={t("enter_your_email_or_mobile")}
+                                    label={t("auth:enter_your_email_or_mobile")}
+                                    placeholder={t("auth:enter_your_email_or_mobile")}
                                     icon={<IconUser fill={true} />}
                                     onChange={(value: string | null) => setState({ ...state, identifier: value })}
                                 />
                                 <div>
                                     <InputLabelPassword
                                         value={state.password}
-                                        label={t("password")}
-                                        placeholder={t("enter_your_password")}
+                                        label={t("auth:password")}
+                                        placeholder={t("auth:enter_your_password")}
                                         onChange={(value: string | null) => setState({ ...state, password: value })}
                                     />
                                 </div>

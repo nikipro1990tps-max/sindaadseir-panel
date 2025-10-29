@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import IconX from "../Icon/IconX"
 
 interface InputLabelProps {
-    value?: string;
+    value?: string | null;
     label?: string;
     placeholder?: string;
     type?: string;

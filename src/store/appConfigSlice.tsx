@@ -8,7 +8,7 @@ const defaultState = {
 const initialState = {
 
     user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user') as string) : defaultState.user,
-    isLogin: !!localStorage.getItem('user'),
+    isLogin: !!localStorage.getItem('user') && !!localStorage.getItem('token'),
 
 }
 
@@ -24,12 +24,12 @@ const appConfigSlice = createSlice({
         changeUserData(state, { payload }) {
             payload = payload || state.user; // full, boxed-layout
             localStorage.setItem('user', payload ? JSON.stringify(payload) : "");
-            // const hasToken = !!localStorage.getItem('token')
+            const hasToken = !!localStorage.getItem('token')
             state.user = payload
-            state.isLogin = !!payload 
+            state.isLogin = !!payload && hasToken
         },
 
-        logout(state){
+        logout(state) {
             state.isLogin = false
             localStorage.removeItem("uesr")
             localStorage.removeItem("token")
@@ -38,6 +38,6 @@ const appConfigSlice = createSlice({
 
 })
 
-export const { setLogin, changeUserData,logout } = appConfigSlice.actions;
+export const { setLogin, changeUserData, logout } = appConfigSlice.actions;
 
 export default appConfigSlice.reducer;
