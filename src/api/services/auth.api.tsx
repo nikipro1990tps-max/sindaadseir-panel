@@ -1,28 +1,16 @@
-import { MyToast } from "../../components/Elements/MyToast";
-import axiosInstance from "../axiosConfig"
+import axiosApiCall from "../axiosApiCall";
 
 // سرویس‌های خاص
 export const authApiService = {
-    async login(body: { identifier: string, password: string }, signal: any = null) {
-
-        try {
-            const response = await axiosInstance.post('/user/auth/login/admin', body, signal);
-            return response.data.result
-        } catch (error) {
-            // throw error
-            MyToast.error(error)
-        }
+    async login(body: { identifier: string, password: string }) {
+        return await axiosApiCall.post('/user/auth/admin/login', body)
     },
 
 
     async checkLogin() {
-        try {
-            const response = await axiosInstance.get("/user/auth")
-            return response.data?.result
-        } catch (error) {
-            MyToast.error(error)
-            throw error
-        }
+
+        return await axiosApiCall.get("/user/auth/admin")
+
     },
 
 
