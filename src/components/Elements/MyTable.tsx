@@ -72,7 +72,7 @@ interface TableProps {
     take?: number;
     total?: number;
     sortColumns?: SortColumn[];
-    onSortChange?: (sort: SortColumn) => void;
+    onSortChange?: (sort: SortColumn[]) => void;
     actions?: ActionType[];
     onSelectAction?: (actionKey: string, row: any) => void;
     onPageChange?: (page: number) => void;
@@ -194,7 +194,7 @@ const MyTable = (props: TableProps) => {
 
         // به روزرسانی state و فراخوانی callback
         setState(prev => ({ ...prev, sortColumns: updatedSortColumns }));
-        onSortChange(updatedSortColumns[sortIndex]);
+        onSortChange(updatedSortColumns);
     }, [state.sortColumns, onSortChange]);
 
     /**
