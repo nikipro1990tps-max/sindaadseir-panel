@@ -4,6 +4,8 @@ import { setPageTitle } from '../../../store/themeConfigSlice';
 import { useTranslation } from 'react-i18next';
 import { rolehApiService } from '../../../api/services/role.api';
 import MyTable from '../../../components/Elements/MyTable';
+import ConfirmModal from '../../../components/Elements/ConfirmModal';
+import InputModal from '../../../components/Elements/InputModal';
 
 const RoleListPage = () => {
 
@@ -104,6 +106,22 @@ const RoleListPage = () => {
     return (
         <div className='panel'>
             <h1 className='p-4 m-2'>{t('admin:roleList')}</h1>
+
+
+
+            <InputModal
+                onConfirm={(value) => { console.log(value) }}
+            />
+
+            <ConfirmModal
+                onConfirm={() => {
+                    console.log(3433, "confirm");
+                }}
+                onCancel={() => {
+                    console.log(4444444, "cancel");
+                }}
+            />
+
             <MyTable
                 page={page}
                 take={take}
@@ -113,7 +131,7 @@ const RoleListPage = () => {
                 onPageChange={(page) => { console.log(44444444, page) }}
                 sortColumns={[{ column: "id", direction: "desc" }, { column: "name", direction: "asc" }]}
                 checkBoxMode={true}
-                onRowsChecked={(isExcludeMode: boolean, checks: any[])=> console.log(33333333, isExcludeMode, 666, checks)}
+                onRowsChecked={(isExcludeMode: boolean, checks: any[]) => console.log(33333333, isExcludeMode, 666, checks)}
                 onSortChange={(sort) => console.log(8888888, "sort", sort)}
                 columns={
                     [{
