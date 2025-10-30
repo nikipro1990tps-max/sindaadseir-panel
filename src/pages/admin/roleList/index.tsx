@@ -111,7 +111,9 @@ const RoleListPage = () => {
                 actions={[{ title: "حذف", "key": "delete", permissions: ["user-list"] }]}
                 onSelectAction={(key, row) => { console.log(444444, key, row) }}
                 onPageChange={(page) => { console.log(44444444, page) }}
-                sortColumns={[{ column: "id", direction: "desc" }]}
+                sortColumns={[{ column: "id", direction: "desc" }, { column: "name", direction: "asc" }]}
+                checkBoxMode={true}
+                onRowsChecked={(isExcludeMode: boolean, checks: any[])=> console.log(33333333, isExcludeMode, 666, checks)}
                 onSortChange={(sort) => console.log(8888888, "sort", sort)}
                 columns={
                     [{
