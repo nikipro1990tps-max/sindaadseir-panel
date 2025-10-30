@@ -1,18 +1,27 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from "react";
-import { setPageTitle } from '../store/themeConfigSlice';
+import { useEffect, useState } from "react";
+import { setPageTitle } from '../../../store/themeConfigSlice';
 import { useTranslation } from 'react-i18next';
 
-const Test1 = () => {
+const AdminListPage = () => {
 
+    const dispatch = useDispatch()
+    const { t } = useTranslation(["admin"])
+
+
+
+ 
+    useEffect(() => {
+        dispatch(setPageTitle(t("admin:adminList")));
+    }, []);
 
 
 
     return (
         <div>
-            <h1>analytics</h1>
+            <h1>{t("admin:adminList")}</h1>
         </div>
     );
 };
 
-export default Test1;
+export default AdminListPage;

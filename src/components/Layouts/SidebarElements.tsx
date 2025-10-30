@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { findRouteByName } from '../../router/routes';
+import { FindRouteByName } from '../../router/routes';
 import { NavLink } from 'react-router-dom';
 import AnimateHeight from 'react-animate-height';
 import IconCaretDown from '../Icon/IconCaretDown';
@@ -17,33 +17,39 @@ interface SidebarElementsProps {
 
 const SidebarElements: React.FC<SidebarElementsProps> = (props) => {
     const { currentMenu, toggleMenu = (menu) => { } } = props;
-    const { t } = useTranslation();
+    const { t } = useTranslation(["sidebar"]);
 
     const user = useSelector((state: IRootState) => state.appConfig.user);
 
     const SideBarItems = [
         {
-            title: t('dashboard'),
-            name: 'dashboard',
+            title: t('sidebar:dashboard'),
+            icon: <IconMenuDashboard className="group-hover:!text-primary shrink-0" />,
+            ...FindRouteByName('dashboard'),
+         
+        },
+        {
+            title: t('sidebar:admin.title'),
             icon: <IconMenuDashboard className="group-hover:!text-primary shrink-0" />,
             children: [
                 {
-                    title: t('analytics'),
+                    title: t('sidebar:admin.adminList'),
                     subLevel: 1,
-                    ...findRouteByName('analytics'),
+                    ...FindRouteByName('admins'),
                 },
                 {
-                    title: t('sales'),
+                    title: t('sidebar:admin.roleList'),
                     subLevel: 1,
-                    ...findRouteByName("sales"),
+                    ...FindRouteByName('roles'),
                 },
             ]
         },
         {
-            title: t('chat'),
-            ...findRouteByName("chat"),
-            icon: <IconMenuChat className="group-hover:!text-primary shrink-0" />
-        }
+            title: t('sidebar:users.title'),
+            icon: <IconMenuDashboard className="group-hover:!text-primary shrink-0" />,
+            ...FindRouteByName('users'),
+         
+        },
     ]
 
 

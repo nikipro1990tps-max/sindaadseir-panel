@@ -8,7 +8,7 @@ import InputLabelPassword from '../components/Elements/InputLabelPassword';
 import { MyToast } from '../components/Elements/MyToast';
 import { authApiService } from '../api/services/auth.api';
 import IconUser from '../components/Icon/IconUser';
-import { changeUserData, setLogin } from '../store/appConfigSlice';
+import { changeUserData } from '../store/appConfigSlice';
 
 interface LoginStateItems {
     identifier: string | null,

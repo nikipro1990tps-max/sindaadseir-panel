@@ -1,8 +1,9 @@
 import { lazy } from 'react';
 const Index = lazy(() => import('../pages/Index'));
-const Analytics = lazy(() => import('../pages/test1'));
-const Sales = lazy(() => import('../pages/test2'));
-const Chat = lazy(() => import('../pages/test3'));
+const AdminList = lazy(() => import('../pages/admin/adminList'));
+const RoleList = lazy(() => import('../pages/admin/roleList'));
+const UserList = lazy(() => import('../pages/users/userList'));
+const Profile = lazy(() => import('../pages/profile'));
 
 
 const routes= [
@@ -15,28 +16,35 @@ const routes= [
     },
 
     {
-        name: 'analytics',
-        path: '/analytics',
-        element: <Analytics />,
-        permissions: ["ad"],
+        name: 'admins',
+        path: '/admins',
+        element: <AdminList />,
+        permissions: ["users-manage", "user-list"],
 
     },
     {
-        name: 'sales',
-        path: '/sales',
-        element: <Sales />,
-        permissions: ["user-list"],
+        name: 'roles',
+        path: '/roles',
+        element: <RoleList />,
+        permissions: ["roles-manage", "role-list"],
     },
     {
-        name: 'chat',
-        path: '/app/chat',
-        element: <Chat />,
+        name: 'users',
+        path: '/users',
+        element: <UserList />,
+        permissions: ["users-manager", "user-list"],
+    },
+
+    {
+        name: 'profile',
+        path: '/user-profile',
+        element: <Profile />,
     },
 
 ];
 
-const findRouteByName = (name: string)  => {
+const FindRouteByName = (name: string)  => {
     return routes.find(x => x.name == name) || {}
 }
 
-export { routes, findRouteByName };
+export { routes, FindRouteByName };

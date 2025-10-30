@@ -1,0 +1,14 @@
+{
+    "dashboard": "داشبورد",
+
+    "admin": {
+        "title": "مدیران",
+        "adminList": "لیست مدیران",
+        "roleList": "نقش ها"
+    },
+
+    "users": {
+        "title": "کاربران",
+        "userList": "لیست کاربران"
+    }
+}

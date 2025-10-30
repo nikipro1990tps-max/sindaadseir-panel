@@ -21,7 +21,7 @@ const Pagination: React.FC<PaginationProps> = ({
     maxVisiblePages = 5
 }) => {
 
-    const { t } = useTranslation();
+    // const { t } = useTranslation();
 
     const totalPages = Math.ceil(totalItems / itemsPerPage);
 
@@ -76,14 +76,14 @@ const Pagination: React.FC<PaginationProps> = ({
 
     const pages = generatePageNumbers();
 
-    const getPageRangeText = (): string => {
-        const startItem = ((currentPage - 1) * itemsPerPage) + 1;
-        const endItem = Math.min(currentPage * itemsPerPage, totalItems);
-        return `${t("pagination", { total: totalItems, from: startItem, to: endItem })}`
-    };
+    // const getPageRangeText = (): string => {
+    //     const startItem = ((currentPage - 1) * itemsPerPage) + 1;
+    //     const endItem = Math.min(currentPage * itemsPerPage, totalItems);
+    //     return `${t("pagination", { total: totalItems, from: startItem, to: endItem })}`
+    // };
 
     return (
-        <div className="flex flex-col items-center space-y-4 mt-8">
+        <div className="flex flex-col items-center space-y-4">
             {/* پیجینیشن اصلی */}
             <ul className="inline-flex items-center gap-1">
                 {/* First Page */}
@@ -171,41 +171,41 @@ const Pagination: React.FC<PaginationProps> = ({
             </ul>
 
             {/* اطلاعات صفحه */}
-            <div className="text-sm text-gray-600 dark:text-gray-400">
+            {/* <div className="text-sm text-gray-600 dark:text-gray-400">
                 {getPageRangeText()}
-            </div>
+            </div> */}
         </div>
     );
 };
 
-// مثال استفاده از کامپوننت
-export const PaginationExample: React.FC = () => {
-    const [currentPage, setCurrentPage] = React.useState<number>(1);
-    const totalItems = 156;
-    const itemsPerPage = 10;
+// // مثال استفاده از کامپوننت
+// export const PaginationExample: React.FC = () => {
+//     const [currentPage, setCurrentPage] = React.useState<number>(1);
+//     const totalItems = 156;
+//     const itemsPerPage = 10;
 
-    const handlePageChange = (page: number): void => {
-        setCurrentPage(page);
-        console.log(`تغییر به صفحه: ${page}`);
-    };
+//     const handlePageChange = (page: number): void => {
+//         setCurrentPage(page);
+//         console.log(`تغییر به صفحه: ${page}`);
+//     };
 
-    return (
-        <div className="p-6 bg-white dark:bg-gray-900 rounded-lg">
-            <h2 className="text-xl font-bold mb-4 text-gray-800 dark:text-white">مثال پیجینیشن</h2>
+//     return (
+//         <div className="p-6 bg-white dark:bg-gray-900 rounded-lg">
+//             <h2 className="text-xl font-bold mb-4 text-gray-800 dark:text-white">مثال پیجینیشن</h2>
 
-            <div className="mb-4 p-4 bg-gray-100 dark:bg-gray-800 rounded">
-                <p className="text-gray-700 dark:text-gray-300">صفحه فعلی: {currentPage}</p>
-            </div>
+//             <div className="mb-4 p-4 bg-gray-100 dark:bg-gray-800 rounded">
+//                 <p className="text-gray-700 dark:text-gray-300">صفحه فعلی: {currentPage}</p>
+//             </div>
 
-            <Pagination
-                totalItems={totalItems}
-                itemsPerPage={itemsPerPage}
-                currentPage={currentPage}
-                onPageChange={handlePageChange}
-                maxVisiblePages={5}
-            />
-        </div>
-    );
-};
+//             <Pagination
+//                 totalItems={totalItems}
+//                 itemsPerPage={itemsPerPage}
+//                 currentPage={currentPage}
+//                 onPageChange={handlePageChange}
+//                 maxVisiblePages={5}
+//             />
+//         </div>
+//     );
+// };
 
 export default Pagination;

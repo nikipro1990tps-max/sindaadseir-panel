@@ -9,7 +9,7 @@ i18n
     .use(LanguageDetector)
     .use(initReactI18next)
     .init({
-        fallbackLng: themeConfig.locale || 'en',
+        fallbackLng: themeConfig.locale || 'fa',
         debug: false,
         load: 'languageOnly',
         

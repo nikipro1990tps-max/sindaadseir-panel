@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation , useNavigate } from 'react-router-dom';
 import { IRootState } from '../../store';
 import { toggleTheme, toggleSidebar } from '../../store/themeConfigSlice';
 import { useTranslation } from 'react-i18next';
-import Dropdown from '../Dropdown';
+import Dropdown from '../Elements/Dropdown';
 import IconMenu from '../Icon/IconMenu';
 import IconSun from '../Icon/IconSun';
 import IconMoon from '../Icon/IconMoon';
@@ -17,6 +17,7 @@ import { logout } from '../../store/appConfigSlice';
 
 const Header = () => {
     const location = useLocation();
+    const navigation = useNavigate()
     useEffect(() => {
         const selector = document.querySelector('ul.horizontal-menu a[href="' + window.location.pathname + '"]');
         if (selector) {
@@ -38,6 +39,7 @@ const Header = () => {
         }
     }, [location]);
 
+    const user = useSelector((state: IRootState) => state.appConfig.user)
     const isRtl = useSelector((state: IRootState) => state.themeConfig.rtlClass) === 'rtl' ? true : false;
 
     const themeConfig = useSelector((state: IRootState) => state.themeConfig);
@@ -59,6 +61,11 @@ const Header = () => {
 
     const { t } = useTranslation(["auth"]);
 
+    function doLogout(){
+        dispatch(logout())
+        navigation("/")
+    }
+
     return (
         <header className={`z-40 ${themeConfig.semidark && themeConfig.menu === 'horizontal' ? 'dark' : ''}`}>
             <div className="shadow-sm">
@@ -66,8 +73,8 @@ const Header = () => {
                     <div className="horizontal-logo flex lg:hidden justify-between items-center ltr:mr-2 rtl:ml-2">
 
 
-                        <Link to="/" className="main-logo flex items-center shrink-0">
-                            <img className="w-8 ltr:-ml-1 rtl:-mr-1 inline" src="/assets/images/logo.svg" alt="logo" />
+                        <Link to="/profile" className="main-logo flex items-center shrink-0">
+                            <img className="w-8 ltr:-ml-1 rtl:-mr-1 inline" src={user.avatar || "/assets/images/auth/user.png"} alt="logo" />
                             <span className="text-2xl ltr:ml-1.5 rtl:mr-1.5  font-semibold  align-middle hidden md:inline dark:text-white-light transition-all duration-300">VRISTO</span>
                         </Link>
 
@@ -351,20 +358,20 @@ const Header = () => {
                                 offset={[0, 8]}
                                 placement={`${isRtl ? 'bottom-start' : 'bottom-end'}`}
                                 btnClassName="relative group block"
-                                button={<img className="w-9 h-9 rounded-full object-cover saturate-50 group-hover:saturate-100" src="/assets/images/user-profile.jpeg" alt="userProfile" />}
+                                button={<img className="w-9 h-9 rounded-full object-cover saturate-50 group-hover:saturate-100" src={user.avatar || "/assets/images/auth/user.png"} alt={user.name} />}
                             >
                                 <ul className="text-dark dark:text-white-dark !py-0 w-[230px] font-semibold dark:text-white-light/90">
                                     <li>
                                         <div className="flex items-center px-4 py-4">
-                                            <img className="rounded-md w-10 h-10 object-cover" src="/assets/images/user-profile.jpeg" alt="userProfile" />
+                                            <img className="rounded-md w-10 h-10 object-cover" src={user.avatar || "/assets/images/auth/user.png"} alt={user.name} />
                                             <div className="ltr:pl-4 rtl:pr-4 truncate">
                                                 <h4 className="text-base">
-                                                    John Doe
-                                                    <span className="text-xs bg-success-light rounded text-success px-1 ltr:ml-2 rtl:ml-2">Pro</span>
+                                                   {user.name}
+                                                    <span className="text-xs bg-success-light rounded text-success px-1 ltr:ml-2 rtl:ml-2">{user.access}</span>
                                                 </h4>
-                                                <button type="button" className="text-black/60 hover:text-primary dark:text-dark-light/60 dark:hover:text-white">
+                                                {/* <button type="button" className="text-black/60 hover:text-primary dark:text-dark-light/60 dark:hover:text-white">
                                                     johndoe@gmail.com
-                                                </button>
+                                                </button> */}
                                             </div>
                                         </div>
                                     </li>
@@ -387,7 +394,7 @@ const Header = () => {
                                         </Link>
                                     </li>
                                     <li className="border-t border-white-light dark:border-white-light/10">
-                                        <Link to="" className="text-danger !py-3" onClick={() => dispatch(logout())}>
+                                        <Link to="" className="text-danger !py-3" onClick={() => doLogout()}>
                                             <IconLogout className="w-4.5 h-4.5 ltr:mr-2 rtl:ml-2 rotate-90 shrink-0" />
                                             {t("auth:signout")}
                                         </Link>
