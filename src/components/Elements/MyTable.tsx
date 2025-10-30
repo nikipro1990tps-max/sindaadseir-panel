@@ -165,7 +165,7 @@ const MyTable = (props: TableProps) => {
     }, [page, take, sortColumns]);
 
     /**
-     * مدیریت کلیک روی آیкон مرتب‌سازی
+     * مدیریت کلیک روی آیکن مرتب‌سازی
      * چرخه جهت‌های مرتب‌سازی: null -> desc -> asc -> null
      * @param {string} columnKey - کلید ستون مورد نظر برای مرتب‌سازی
      */
@@ -198,10 +198,10 @@ const MyTable = (props: TableProps) => {
     }, [state.sortColumns, onSortChange]);
 
     /**
-     * رندر آیкон مرتب‌سازی برای ستون‌ها
-     * آیкон بر اساس جهت مرتب‌سازی فعلی تغییر می‌کند
+     * رندر آیکن مرتب‌سازی برای ستون‌ها
+     * آیکن بر اساس جهت مرتب‌سازی فعلی تغییر می‌کند
      * @param {string} columnKey - کلید ستون مورد نظر
-     * @returns {JSX.Element | null} آیкон مرتب‌سازی یا null
+     * @returns {JSX.Element | null} آیکن مرتب‌سازی یا null
      */
     const renderSortIcon = useCallback((columnKey: string) => {
         // پیدا کردن اطلاعات مرتب‌سازی برای ستون مورد نظر
@@ -214,7 +214,7 @@ const MyTable = (props: TableProps) => {
 
         const direction = sortItem.direction;
 
-        // حالت اول: بدون مرتب‌سازی (نمایش آیкон خنثی)
+        // حالت اول: بدون مرتب‌سازی (نمایش آیکن خنثی)
         if (!direction) {
             return (
                 <button
