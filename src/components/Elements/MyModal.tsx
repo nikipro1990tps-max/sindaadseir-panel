@@ -68,6 +68,7 @@ const MyModal: React.FC<ModalProps> = (props) => {
             MyToast.info("لطفا کمی صبر کنید")
             return
         }
+        setState({...state, isOpen: false})
         onClose();
 
     };

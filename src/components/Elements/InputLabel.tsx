@@ -37,7 +37,7 @@ const InputLabel = (props: InputLabelProps) => {
 
     return (
         <div>
-            {label && <label htmlFor={label}>{label}</label>}
+            {label && <label className="dark:text-white-dark text-start" htmlFor={label}>{label}</label>}
             <div className="relative text-white-dark">
                 <span 
                     className={`absolute end-2 top-1/2 -translate-y-1/2 cursor-pointer ${text ? 'opacity-100' : 'opacity-0'}`} 

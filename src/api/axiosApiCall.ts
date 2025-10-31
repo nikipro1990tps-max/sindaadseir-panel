@@ -30,7 +30,11 @@ const axiosApiCall = {
 
     async post(url: string, body = {}) {
         try {
-            const response = await axiosInstance.post(url, body)
+            const response = await axiosInstance.post(url, body, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
             return response.data.result
         } catch (error) {
             MyToast.error(error)

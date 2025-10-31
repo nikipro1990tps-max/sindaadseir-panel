@@ -1,7 +1,7 @@
 import axiosApiCall from "../axiosApiCall";
 
 // سرویس‌های خاص
-export const rolehApiService = {
+export const roleApiService = {
 
     async permissions() {
         return await axiosApiCall.get('/user/role/permissions')

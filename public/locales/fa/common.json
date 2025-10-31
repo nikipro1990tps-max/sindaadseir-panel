@@ -1,5 +1,6 @@
 {
     "dashboard": "داشبورد",
+    "success_action": "عملیات با موفقیت انجام شد",
     "action": "عملیات",
     "add": "افزودن",
     "tabe_status": "نمایش {{first}} تا {{end}} از {{total}} داده",

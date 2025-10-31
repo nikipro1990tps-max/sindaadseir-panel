@@ -2,11 +2,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from "react";
 import { setPageTitle } from '../../../store/themeConfigSlice';
 import { useTranslation } from 'react-i18next';
-import { rolehApiService } from '../../../api/services/role.api';
-import MyTable from '../../../components/Elements/MyTable';
+import { roleApiService } from '../../../api/services/role.api';
 import InputLabel from '../../../components/Elements/InputLabel';
 import IconPlus from '../../../components/Icon/IconPlus';
-import MyModal from '../../../components/Elements/MyModal';
+import RolePermissionsModal from './roleModal'
+import RoleListTable from './RoleListTable';
 
 const RoleListPage = () => {
 
@@ -16,7 +16,9 @@ const RoleListPage = () => {
     // states
     const [filters, setFilters] = useState({ search: "", page: 1, take: 10 })
     const [list, setList] = useState({ data: [], count: 0 })
-    const [openRoleModal, setRoleModal] = useState<number | null | boolean>(null)
+    const [permissions, setPermissions] = useState([])
+    const [openRoleModal, setOpenRoleModal] = useState<any>(null)
+    const [deleteModal, setDeleteModal] = useState(null)
 
     async function fetchData() {
 
@@ -24,7 +26,7 @@ const RoleListPage = () => {
 
             setList({ data: [], count: 0 })
 
-            const { roles, count } = await rolehApiService.roles(filters)
+            const { roles, count } = await roleApiService.roles(filters)
 
             setList({ data: roles, count })
 
@@ -34,36 +36,58 @@ const RoleListPage = () => {
     }
 
 
-    function hadnleTableAction(key: string, row: any) {
-        if (key == "update") {
+    async function fetchPermissions() {
+        try {
 
+            setPermissions([])
+
+            const permissions = await roleApiService.permissions()
+
+            setPermissions(permissions)
+
+        } catch (error) {
+            // do something
         }
     }
 
+
+    function handleActionClick(key: string, row: any){
+
+        if (key == 'update'){
+            setOpenRoleModal(row)
+        }else if (key == 'delete'){
+
+        }
+    }
 
     useEffect(() => {
         dispatch(setPageTitle(t("admin:roleList")));
 
         fetchData()
+        fetchPermissions()
     }, [filters]);
 
     return (
         <div className='panel'>
+
+
+            {openRoleModal &&
+                <RolePermissionsModal
+                    permissionsList={permissions}
+                    rolePermissions={(!openRoleModal || typeof openRoleModal == 'boolean') ? null : openRoleModal}
+                    submitHandler={() => { console.log(444444444) }}
+                    closeHandler={() => setOpenRoleModal(null)}
+                />
+            }
+
             <h1 className='p-4 m-2'>{t('admin:roleList')}</h1>
+
+
 
             {/* filters */}
             <div className='flex flex-wrap justify-between items-center gap-4 p-2 mb-4'>
 
-                {openRoleModal &&
-                    <MyModal
-                        isStatic={true}
-                        onSubmit={() => setRoleModal(null)}
-                        onClose={() => setRoleModal(null)}
-                    >
 
-                        <p>asdasdsda</p>
-                    </MyModal>
-                }
 
                 <InputLabel
                     value={filters.search}
@@ -72,29 +96,21 @@ const RoleListPage = () => {
 
                 />
 
-                <button type="button" className="btn btn-primary" onClick={() => setRoleModal(true)}>{t("add")}<IconPlus /></button>
+                <button type="button" className="btn btn-primary" onClick={() => setOpenRoleModal(true)}>{t("add")}<IconPlus /></button>
 
             </div>
 
 
-            <MyTable
-                rows={list.data}
+
+            <RoleListTable
+                list={list.data}
                 total={list.count}
                 page={filters.page}
                 take={filters.take}
-                actions={[
-                    { title: "ویراش", "key": "update", permissions: ["role-manage"] },
-                    { title: "حذف", "key": "delete", permissions: ["role-manage"] },
-                ]}
-                onSelectAction={(key, row) => { console.log(444444, key, row) }}
-                onPageChange={(page) => { setFilters({ ...filters, page }) }}
-                onTakeChange={(take) => { setFilters({ ...filters, page: 1, take }) }}
-                columns={
-                    [{ "key": "id", "title": "شناسه" },
-                    { "key": "name", "title": "نام" }]
-                }
-
+                onChangeFilters={(filters: any) => { setFilters({ ...filters }) }}
+                handleActionClick={(action, row) => { handleActionClick(action , row) }}
             />
+
         </div>
     );
 };
