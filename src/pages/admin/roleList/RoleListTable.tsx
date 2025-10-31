@@ -1,8 +1,5 @@
 import { DataTable } from "mantine-datatable"
 import { useEffect, useState } from "react"
-import Dropdown from "../../../components/Elements/Dropdown"
-import IconVerticalAction from "../../../components/Icon/IconVerticalAction"
-import Protector from "../../../components/Protector"
 import { useSelector } from "react-redux"
 import { IRootState } from "../../../store"
 import IconTrash from "../../../components/Icon/IconTrash"
@@ -19,7 +16,7 @@ interface RoleListTable {
 
 function RoleListTable(props: RoleListTable) {
 
-    const { handleActionClick = (action: string, row: any) => { }, onChangeFilters = (filters: any) => { }, list = null, total, page, take } = props
+    const { list = null, total, page, take, handleActionClick = (action: string, row: any) => { }, onChangeFilters = (filters: any) => { } } = props
 
     const isRtl = useSelector((state: IRootState) => state.themeConfig.rtlClass) === 'rtl' ? true : false;
 
@@ -28,7 +25,7 @@ function RoleListTable(props: RoleListTable) {
     const [filters, setFilters] = useState({ page, take })
 
     useEffect(() => {
-        if (list) setRows(list)
+        setRows(list || [])
     }, [list])
 
     useEffect(() => {
@@ -46,8 +43,8 @@ function RoleListTable(props: RoleListTable) {
 
                 columns={[
                     {
-                        accessor: 'id', textAlignment: `${isRtl ? "right" : "left"}`,
-                        title: `id`, render: ({ id }) => <strong className="text-info text-center">#{id}</strong>
+                        accessor: 'index', textAlignment: `${isRtl ? "right" : "left"}`,
+                        title: `#`, render: ({ id }) => <strong className="text-info text-center">#{rows.findIndex(x => x.id == id) * page + 1 }</strong>
                     },
                     {
                         accessor: 'name',

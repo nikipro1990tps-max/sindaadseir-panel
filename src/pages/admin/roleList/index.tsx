@@ -7,6 +7,8 @@ import InputLabel from '../../../components/Elements/InputLabel';
 import IconPlus from '../../../components/Icon/IconPlus';
 import RolePermissionsModal from './roleModal'
 import RoleListTable from './RoleListTable';
+import ConfirmAlert from '../../../components/Elements/ConfirmAlert';
+import { MyToast } from '../../../components/Elements/MyToast';
 
 const RoleListPage = () => {
 
@@ -16,9 +18,8 @@ const RoleListPage = () => {
     // states
     const [filters, setFilters] = useState({ search: "", page: 1, take: 10 })
     const [list, setList] = useState({ data: [], count: 0 })
-    const [permissions, setPermissions] = useState([])
-    const [openRoleModal, setOpenRoleModal] = useState<any>(null)
-    const [deleteModal, setDeleteModal] = useState(null)
+    const [permissions, setPermissions] = useState<any>(null)
+    const [roleModal, setRoleModal] = useState<any>(null)
 
     async function fetchData() {
 
@@ -51,13 +52,40 @@ const RoleListPage = () => {
     }
 
 
-    function handleActionClick(key: string, row: any){
+    function handleActionClick(key: string, row: any) {
 
-        if (key == 'update'){
-            setOpenRoleModal(row)
-        }else if (key == 'delete'){
-
+        if (key == 'update') {
+            setRoleModal(row)
+        } else if (key == 'delete') {
+            openDeleteModal(row)
         }
+    }
+
+    async function openDeleteModal(row: any) {
+
+
+
+        ConfirmAlert({
+            title: t("delete_title", { item: row.name }),
+            text: t("sure_delete_text", { item: row.name }),
+            onConfirm: async () => {
+                try {
+
+                    await roleApiService.delete(row.id)
+
+                    MyToast.success(`${t("delete_success")}`)
+
+
+                    fetchData()
+                } catch (error) {
+
+                }
+            }
+        })
+
+
+
+
     }
 
     useEffect(() => {
@@ -70,17 +98,16 @@ const RoleListPage = () => {
     return (
         <div className='panel'>
 
-
-            {openRoleModal &&
+            {(roleModal && permissions) &&
                 <RolePermissionsModal
                     permissionsList={permissions}
-                    rolePermissions={(!openRoleModal || typeof openRoleModal == 'boolean') ? null : openRoleModal}
-                    submitHandler={() => { console.log(444444444) }}
-                    closeHandler={() => setOpenRoleModal(null)}
+                    rolePermissions={(typeof roleModal == 'boolean') ? null : roleModal}
+                    submitHandler={() => { fetchData() }}
+                    closeHandler={() => setRoleModal(null)}
                 />
             }
 
-            <h1 className='p-4 m-2'>{t('admin:roleList')}</h1>
+            <h1 className='p-4 m-2'>{t('admin:role.roleList')}</h1>
 
 
 
@@ -91,12 +118,12 @@ const RoleListPage = () => {
 
                 <InputLabel
                     value={filters.search}
-                    placeholder="نام نقش را جستجو کنید"
+                    placeholder={`${t('admin:role.search')}`}
                     onChange={(search) => { setFilters({ ...filters, search }) }}
 
                 />
 
-                <button type="button" className="btn btn-primary" onClick={() => setOpenRoleModal(true)}>{t("add")}<IconPlus /></button>
+                <button type="button" className="btn btn-primary" onClick={() => setRoleModal(true)}>{t("add")}<IconPlus /></button>
 
             </div>
 
@@ -108,7 +135,7 @@ const RoleListPage = () => {
                 page={filters.page}
                 take={filters.take}
                 onChangeFilters={(filters: any) => { setFilters({ ...filters }) }}
-                handleActionClick={(action, row) => { handleActionClick(action , row) }}
+                handleActionClick={(action, row) => { handleActionClick(action, row) }}
             />
 
         </div>

@@ -1,6 +1,13 @@
 {
     "dashboard": "داشبورد",
     "success_action": "عملیات با موفقیت انجام شد",
+    "delete_title": "حذف {{item}}",
+    "sure_delete_text": "آیا از حذف {{item}} مطمئن هستید؟",
+    "delete_success": "حذف با موفقیت انجام شد",
+    "name": "نام",
+    "title": "عنوان",
+    "atleast_characters": "حداقل {{n}} کاراکتر برای {{data}} لازم است",
+    "enter_data": "{{data}} را وارد کنید",
     "action": "عملیات",
     "add": "افزودن",
     "tabe_status": "نمایش {{first}} تا {{end}} از {{total}} داده",

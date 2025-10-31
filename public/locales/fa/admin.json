@@ -1,5 +1,10 @@
 {
-    "adminList" : "لیست مدیران",
-    "roleList" : "لیست نقش ها",
-    "enter_role_name": "نام نقش را وارد کنید "
+    "adminList": "لیست مدیران",
+    "role": {
+        "roleList": "لیست نقش ها",
+        "create": "ایجاد نقش",
+        "update": "ویرایش نقش {{name}}",
+        "search": "نام نقش را جستجو کنید",
+        "select_permissions": "انتخاب دسترسی ها"
+    }
 }

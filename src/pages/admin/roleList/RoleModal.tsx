@@ -31,10 +31,9 @@ const RolePermissionsModal = memo((props: RolePermissionsModalProps) => {
         submitHandler = () => { }
     } = props
 
-    const { t } = useTranslation()
+    const { t } = useTranslation(["admin"])
     const [role, setRole] = useState<any>({ name: "", permissions: [] })
     const [loading, setLoading] = useState(false)
-    const [isOpen, setOpen] = useState(true)
 
     function sectionCheckboxChange(e: React.ChangeEvent<HTMLInputElement>) {
         const checked = e.target.checked
@@ -69,6 +68,14 @@ const RolePermissionsModal = memo((props: RolePermissionsModalProps) => {
     }
 
     async function handleSubmit() {
+
+
+        if (role?.name?.length < 2) {
+
+            MyToast.error(`${t("atleast_characters", { n: "2", data: `${t('name')}` })}`,)
+            return
+        }
+
         setLoading(true)
 
         if (rolePermissions?.id) {
@@ -102,7 +109,6 @@ const RolePermissionsModal = memo((props: RolePermissionsModalProps) => {
                 permissions: rolePermissions.permissions || []
             })
         }
-        console.log(9999999999, "rolePermissions")
     }, [rolePermissions])
 
 
@@ -111,7 +117,7 @@ const RolePermissionsModal = memo((props: RolePermissionsModalProps) => {
         <MyModal
             isStatic={true}
             size="xlg"
-            title={!rolePermissions?.name ? 'ایجاد سطح دسترسی' : `ویرایش دسترسی ${role.name}`}
+            title={!rolePermissions?.name ? `${t("admin:role.create")}` : `${t("admin:role.update", { name: rolePermissions.name })}`}
             onClose={closeHandler}
             onSubmit={handleSubmit}
             isLoading={loading}
@@ -121,8 +127,8 @@ const RolePermissionsModal = memo((props: RolePermissionsModalProps) => {
             {/* Name Input */}
             <div className='mt-4 p-4'>
                 <InputLabel
-                    label="نام"
-                    placeholder="نام نقش را وارد کنید"
+                    label={t('name')}
+                    placeholder={`${t('enter_data', { data: `${t('name')}` })}`}
                     value={role.name}
                     onChange={(name: string) => setRole((prev: any) => ({ ...prev, name }))}
                 />
@@ -131,7 +137,7 @@ const RolePermissionsModal = memo((props: RolePermissionsModalProps) => {
             {/* Permissions Section */}
             <div className='p-4'>
                 <h6 className="text-start text-gray-800 dark:text-white mb-4 text-lg font-semibold">
-                    انتخاب دسترسی ها
+                    {t("admin:role.select_permissions")}
                 </h6>
 
                 <div className="space-y-4 max-h-96 overflow-y-auto">
@@ -146,7 +152,10 @@ const RolePermissionsModal = memo((props: RolePermissionsModalProps) => {
                                     <div className="flex items-center space-x-2 rtl:space-x-reverse">
                                         <input
                                             checked={section.permissions.map(x => x.key).every(x => role.permissions.includes(x))}
-                                            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded cursor-pointer"
+                                            className="h-4 w-4 cursor-pointer text-[#4361ee] focus:ring-[#4361ee] pointer border-gray-300 rounded"
+                                            style={{
+                                                accentColor: '#4361ee'
+                                            }}
                                             type="checkbox"
                                             id={`chb-section-${section.title}`}
                                             value={section.section}
@@ -168,7 +177,10 @@ const RolePermissionsModal = memo((props: RolePermissionsModalProps) => {
                                             <div className="flex items-center space-x-2 rtl:space-x-reverse">
                                                 <input
                                                     checked={role.permissions.includes(itemPermissions.key)}
-                                                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded cursor-pointer"
+                                                    className="h-4 w-4 cursor-pointer text-[#4361ee] focus:ring-[#4361ee] pointer border-gray-300 rounded"
+                                                    style={{
+                                                        accentColor: '#4361ee'
+                                                    }}
                                                     type="checkbox"
                                                     id={`chb-${itemPermissions.key}`}
                                                     value={itemPermissions.key}
