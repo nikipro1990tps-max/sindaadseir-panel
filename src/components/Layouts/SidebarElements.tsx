@@ -9,6 +9,7 @@ import IconMenuChat from '../Icon/Menu/IconMenuChat';
 import { useSelector } from 'react-redux';
 import { IRootState } from '../../store';
 import { ReactNode, useEffect, useMemo, useState } from 'react';
+import IconMenuUsers from '../Icon/Menu/IconMenuUsers';
 
 interface SidebarElementsProps {
     currentMenu: string;
@@ -30,7 +31,7 @@ const SidebarElements: React.FC<SidebarElementsProps> = (props) => {
         },
         {
             title: t('sidebar:admin.title'),
-            icon: <IconMenuDashboard className="group-hover:!text-primary shrink-0" />,
+            icon: <IconMenuUsers className="group-hover:!text-primary shrink-0" />,
             children: [
                 {
                     title: t('sidebar:admin.adminList'),
@@ -46,7 +47,7 @@ const SidebarElements: React.FC<SidebarElementsProps> = (props) => {
         },
         {
             title: t('sidebar:users.title'),
-            icon: <IconMenuDashboard className="group-hover:!text-primary shrink-0" />,
+            icon: <IconMenuUsers className="group-hover:!text-primary shrink-0" />,
             ...FindRouteByName('users'),
          
         },

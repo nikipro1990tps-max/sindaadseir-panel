@@ -7,8 +7,8 @@ export const rolehApiService = {
         return await axiosApiCall.get('/user/role/permissions')
     },
 
-    async roles() {
-        return await axiosApiCall.get('/user/role')
+    async roles(filters = {}) {
+        return await axiosApiCall.get('/user/role', filters)
     },
 
 

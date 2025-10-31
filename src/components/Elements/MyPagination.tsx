@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import IconCaretsDown from '../../components/Icon/IconCaretsDown';
-import IconCaretDown from '../../components/Icon/IconCaretDown';
+import IconCaretsDown from '../Icon/IconCaretsDown';
+import IconCaretDown from '../Icon/IconCaretDown';
 import { useTranslation } from 'react-i18next';
 
 
@@ -177,35 +177,5 @@ const Pagination: React.FC<PaginationProps> = ({
         </div>
     );
 };
-
-// // مثال استفاده از کامپوننت
-// export const PaginationExample: React.FC = () => {
-//     const [currentPage, setCurrentPage] = React.useState<number>(1);
-//     const totalItems = 156;
-//     const itemsPerPage = 10;
-
-//     const handlePageChange = (page: number): void => {
-//         setCurrentPage(page);
-//         console.log(`تغییر به صفحه: ${page}`);
-//     };
-
-//     return (
-//         <div className="p-6 bg-white dark:bg-gray-900 rounded-lg">
-//             <h2 className="text-xl font-bold mb-4 text-gray-800 dark:text-white">مثال پیجینیشن</h2>
-
-//             <div className="mb-4 p-4 bg-gray-100 dark:bg-gray-800 rounded">
-//                 <p className="text-gray-700 dark:text-gray-300">صفحه فعلی: {currentPage}</p>
-//             </div>
-
-//             <Pagination
-//                 totalItems={totalItems}
-//                 itemsPerPage={itemsPerPage}
-//                 currentPage={currentPage}
-//                 onPageChange={handlePageChange}
-//                 maxVisiblePages={5}
-//             />
-//         </div>
-//     );
-// };
 
 export default Pagination;

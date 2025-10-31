@@ -8,6 +8,14 @@ export const MyToast = {
         })
     },
 
+
+    
+    info(message: string) {
+        toast.info(message, {
+            theme: "colored"
+        })
+    },
+
     error(errorValue: any) {
         let message = "unknown error";
     

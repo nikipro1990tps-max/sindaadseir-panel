@@ -4,146 +4,94 @@ import { setPageTitle } from '../../../store/themeConfigSlice';
 import { useTranslation } from 'react-i18next';
 import { rolehApiService } from '../../../api/services/role.api';
 import MyTable from '../../../components/Elements/MyTable';
-import ConfirmModal from '../../../components/Elements/ConfirmModal';
-import InputModal from '../../../components/Elements/InputModal';
+import InputLabel from '../../../components/Elements/InputLabel';
+import IconPlus from '../../../components/Icon/IconPlus';
+import MyModal from '../../../components/Elements/MyModal';
 
 const RoleListPage = () => {
 
     const dispatch = useDispatch()
     const { t } = useTranslation(["admin"])
 
-    // const [list, setList] = useState({ roles: [], count: 0 })
+    // states
+    const [filters, setFilters] = useState({ search: "", page: 1, take: 10 })
+    const [list, setList] = useState({ data: [], count: 0 })
+    const [openRoleModal, setRoleModal] = useState<number | null | boolean>(null)
 
-    // async function fetchData() {
+    async function fetchData() {
 
-    //     try {
-    //         const { roles, count } = await rolehApiService.roles()
-    //         setList({ roles, count })
+        try {
 
-    //     } catch (error) {
-    //         // TODO simething
-    //     }
+            setList({ data: [], count: 0 })
 
-    // }
+            const { roles, count } = await rolehApiService.roles(filters)
 
-    // const list = [
-    //     {
-    //         id: 1,
-    //         name: 'John Doe',
-    //         email: 'johndoe@yahoo.com',
-    //         date: '10/08/2020',
-    //         sale: 120,
-    //         status: 'Complete',
-    //         register: '5 min ago',
-    //         progress: '40%',
-    //         position: 'Developer',
-    //         office: 'London',
-    //     },
-    //     {
-    //         id: 2,
-    //         name: 'Shaun Park',
-    //         email: 'shaunpark@gmail.com',
-    //         date: '11/08/2020',
-    //         sale: 400,
-    //         status: 'Pending',
-    //         register: '11 min ago',
-    //         progress: '23%',
-    //         position: 'Designer',
-    //         office: 'New York',
-    //     },
-    //     {
-    //         id: 3,
-    //         name: 'Alma Clarke',
-    //         email: 'alma@gmail.com',
-    //         date: '12/02/2020',
-    //         sale: 310,
-    //         status: 'In Progress',
-    //         register: '1 hour ago',
-    //         progress: '80%',
-    //         position: 'Accountant',
-    //         office: 'Amazon',
-    //     },
-    //     {
-    //         id: 4,
-    //         name: 'Vincent Carpenter',
-    //         email: 'vincent@gmail.com',
-    //         date: '13/08/2020',
-    //         sale: 100,
-    //         status: 'Canceled',
-    //         register: '1 day ago',
-    //         progress: '60%',
-    //         position: 'Data Scientist',
-    //         office: 'Canada',
-    //     },
-    // ];
+            setList({ data: roles, count })
 
-    const item =
-    {
-        id: 1,
-        name: 'John Doe',
-        email: 'johndoe@yahoo.com',
-        date: '10/08/2020',
-        sale: 120,
-        status: 'Complete',
-        register: '5 min ago',
-        progress: '40%',
-        position: 'Developer',
-        office: 'London',
+        } catch (error) {
+            // do something
+        }
     }
 
-    let rows = []
-    for (let i = 0; i < 250; i++) {
-        rows.push({ ...item, id: (i + 1) })
+
+    function hadnleTableAction(key: string, row: any) {
+        if (key == "update") {
+
+        }
     }
 
-    const page = 5
-    const take = 50
 
     useEffect(() => {
         dispatch(setPageTitle(t("admin:roleList")));
-    }, []);
+
+        fetchData()
+    }, [filters]);
 
     return (
         <div className='panel'>
             <h1 className='p-4 m-2'>{t('admin:roleList')}</h1>
 
+            {/* filters */}
+            <div className='flex flex-wrap justify-between items-center gap-4 p-2 mb-4'>
 
+                {openRoleModal &&
+                    <MyModal
+                        isStatic={true}
+                        onSubmit={() => setRoleModal(null)}
+                        onClose={() => setRoleModal(null)}
+                    >
 
-            <InputModal
-                onConfirm={(value) => { console.log(value) }}
-            />
+                        <p>asdasdsda</p>
+                    </MyModal>
+                }
 
-            <ConfirmModal
-                onConfirm={() => {
-                    console.log(3433, "confirm");
-                }}
-                onCancel={() => {
-                    console.log(4444444, "cancel");
-                }}
-            />
+                <InputLabel
+                    value={filters.search}
+                    placeholder="نام نقش را جستجو کنید"
+                    onChange={(search) => { setFilters({ ...filters, search }) }}
+
+                />
+
+                <button type="button" className="btn btn-primary" onClick={() => setRoleModal(true)}>{t("add")}<IconPlus /></button>
+
+            </div>
+
 
             <MyTable
-                page={page}
-                take={take}
-                rows={rows}
-                actions={[{ title: "حذف", "key": "delete", permissions: ["user-list"] }]}
+                rows={list.data}
+                total={list.count}
+                page={filters.page}
+                take={filters.take}
+                actions={[
+                    { title: "ویراش", "key": "update", permissions: ["role-manage"] },
+                    { title: "حذف", "key": "delete", permissions: ["role-manage"] },
+                ]}
                 onSelectAction={(key, row) => { console.log(444444, key, row) }}
-                onPageChange={(page) => { console.log(44444444, page) }}
-                sortColumns={[{ column: "id", direction: "desc" }, { column: "name", direction: "asc" }]}
-                checkBoxMode={true}
-                onRowsChecked={(isExcludeMode: boolean, checks: any[]) => console.log(33333333, isExcludeMode, 666, checks)}
-                onSortChange={(sort) => console.log(8888888, "sort", sort)}
+                onPageChange={(page) => { setFilters({ ...filters, page }) }}
+                onTakeChange={(take) => { setFilters({ ...filters, page: 1, take }) }}
                 columns={
-                    [{
-                        "key": "id", "title": "شناسه", render: (item) => {
-                            return <span>hi {item.name} #{item.id}</span>
-                        }
-                    },
-                    {
-                        "key": "name", "title": "نام"
-                    }
-
-                    ]
+                    [{ "key": "id", "title": "شناسه" },
+                    { "key": "name", "title": "نام" }]
                 }
 
             />

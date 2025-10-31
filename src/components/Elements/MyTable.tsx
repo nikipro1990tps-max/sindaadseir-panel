@@ -2,7 +2,7 @@ import { useEffect, useState, useMemo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import Dropdown from './Dropdown';
 import Protector from '../Protector';
-import Pagination from './Pagination';
+import MyPagination from './MyPagination';
 import IconVerticalAction from '../Icon/IconVerticalAction';
 import IconUpDown from '../Icon/IconUpDown';
 import IconDown from '../Icon/IconDown';
@@ -116,7 +116,6 @@ const MyTable = (props: TableProps) => {
         onPageChange = () => { },
         onTakeChange = () => { },
         emptyMessage = 'No data available',
-        loading = false,
         className = '',
         checkBoxColumnIdKey = 'id',
         checkBoxMode = false,
@@ -403,7 +402,7 @@ const MyTable = (props: TableProps) => {
                     className="ml-1 opacity-50 hover:opacity-100 transition-opacity"
                     title={t('sort') || 'Sort'}
                 >
-                    <IconUpDown  className="rotate-[-180] rtl:-rotate-[-180]" />
+                    <IconUpDown className="rotate-[-180] rtl:-rotate-[-180]" />
 
                 </button>
             );
@@ -561,7 +560,7 @@ const MyTable = (props: TableProps) => {
     return (
         <div className={`table-responsive mb-5 ${className}`}>
             {/* جدول اصلی */}
-            <table className="table table-hover w-full">
+            <table className="table table-hover table-responsive " style={{ minHeight: "170px" }}>
                 {/* هدر جدول */}
                 <thead className="bg-gray-50 dark:bg-gray-800">
                     <tr>
@@ -667,11 +666,11 @@ const MyTable = (props: TableProps) => {
             </table>
 
             {/* بخش صفحه‌بندی - فقط در صورت وجود داده نمایش داده می‌شود */}
-            {!isEmptyRow && !loading && (
+            {!isEmptyRow && (
                 <div className="flex flex-col sm:flex-row items-center justify-between mt-4 px-4 space-y-3 sm:space-y-0">
                     {/* کامپوننت صفحه‌بندی */}
                     <div className="flex items-center space-x-2">
-                        <Pagination
+                        <MyPagination
                             totalItems={totalItems}
                             currentPage={state.page}
                             itemsPerPage={state.take}

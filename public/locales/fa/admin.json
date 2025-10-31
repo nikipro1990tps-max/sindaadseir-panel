@@ -1,4 +1,5 @@
 {
     "adminList" : "لیست مدیران",
-    "roleList" : "لیست نقش ها"
+    "roleList" : "لیست نقش ها",
+    "enter_role_name": "نام نقش را وارد کنید "
 }
