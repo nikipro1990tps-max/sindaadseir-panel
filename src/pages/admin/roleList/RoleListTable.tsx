@@ -4,6 +4,7 @@ import { useSelector } from "react-redux"
 import { IRootState } from "../../../store"
 import IconTrash from "../../../components/Icon/IconTrash"
 import IconPencil from "../../../components/Icon/IconPencil"
+import { useTranslation } from "react-i18next"
 
 interface RoleListTable {
     list: any[],
@@ -20,6 +21,7 @@ function RoleListTable(props: RoleListTable) {
 
     const isRtl = useSelector((state: IRootState) => state.themeConfig.rtlClass) === 'rtl' ? true : false;
 
+    const { t } = useTranslation(["admin"])
 
     const [rows, setRows] = useState<any[]>([])
     const [filters, setFilters] = useState({ page, take })
@@ -44,11 +46,11 @@ function RoleListTable(props: RoleListTable) {
                 columns={[
                     {
                         accessor: 'index', textAlignment: `${isRtl ? "right" : "left"}`,
-                        title: `#`, render: ({ id }) => <strong className="text-info text-center">#{rows.findIndex(x => x.id == id) * page + 1 }</strong>
+                        title: `#`, render: ({ id }) => <strong className="text-info text-center">#{rows.findIndex(x => x.id == id) * page + 1}</strong>
                     },
                     {
                         accessor: 'name',
-                        title: `name`,
+                        title: `${t("name")}`,
                         textAlignment: `${isRtl ? "right" : "left"}`,
                         // sortable: true,
                         render: ({ name }) => (
@@ -57,7 +59,7 @@ function RoleListTable(props: RoleListTable) {
                     },
                     {
                         accessor: 'action',
-                        title: 'Action',
+                        title: `${t("action")}`,
                         textAlignment: `${isRtl ? "right" : "left"}`,
                         render: (row) => (
 
