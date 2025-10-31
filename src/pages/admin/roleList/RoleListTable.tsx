@@ -1,10 +1,11 @@
 import { DataTable } from "mantine-datatable"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { useSelector } from "react-redux"
 import { IRootState } from "../../../store"
 import IconTrash from "../../../components/Icon/IconTrash"
 import IconPencil from "../../../components/Icon/IconPencil"
 import { useTranslation } from "react-i18next"
+import Protector from "../../../components/Protector"
 
 interface RoleListTable {
     list: any[],
@@ -26,7 +27,7 @@ function RoleListTable(props: RoleListTable) {
     const [rows, setRows] = useState<any[]>([])
     const [filters, setFilters] = useState({ page, take })
 
-    useEffect(() => {
+    useMemo(() => {
         setRows(list || [])
     }, [list])
 
@@ -65,12 +66,18 @@ function RoleListTable(props: RoleListTable) {
 
 
                             <div className="flex flex-wrap gap-5 ">
-                                <button title="update" onClick={() => handleActionClick("update", row)}>
-                                    <IconPencil />
-                                </button>
-                                <button className="text-danger" title="delete" onClick={() => handleActionClick("delete", row)}>
-                                    <IconTrash />
-                                </button>
+                                <Protector requiredPermissions={['role-manage']}>
+                                    <button title="update" onClick={() => handleActionClick("update", row)}>
+                                        <IconPencil />
+                                    </button>
+                                </Protector>
+
+                                <Protector requiredPermissions={['role-manage']}>
+                                    <button className="text-danger" title="delete" onClick={() => handleActionClick("delete", row)}>
+                                        <IconTrash />
+                                    </button>
+                                </Protector>
+
                             </div>
 
                             // <div className="dropdown" >
