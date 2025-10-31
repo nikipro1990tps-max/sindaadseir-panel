@@ -13,7 +13,7 @@ export const userApiService = {
 
     },
 
-    async showUser(userId) {
+    async showUser(userId: number) {
 
         return await axiosApiCall.get(`/user/admin/${userId}`)
 
@@ -59,10 +59,15 @@ export const userApiService = {
 
     },
 
+    async assignRole(userId: number, roles: []) {
 
-    async deletUser(userId: number) {
+        return await axiosApiCall.patch(`/user/role/${userId}`, { roles })
 
-        return await axiosApiCall.delete(`/user/admin/status/${userId}`)
+    },
+
+    async deleteUser(userId: number) {
+
+        return await axiosApiCall.delete(`/user/admin/${userId}`)
 
     },
 

@@ -1,6 +1,14 @@
 {
-    "adminList": "لیست مدیران",
+    "admin": {
+        "adminList": "لیست مدیران",
+        "create": "ایجاد مدیر",
+        "update": "ویرایش مدیر {{name}}",
+        "search": "نام مدیر را جستجو کنید",
+        "roles": "نقش ها",
+        "assign_rols": "اتصال نقش ها"
+    },
     "role": {
+        "role": "نقش",
         "roleList": "لیست نقش ها",
         "create": "ایجاد نقش",
         "update": "ویرایش نقش {{name}}",

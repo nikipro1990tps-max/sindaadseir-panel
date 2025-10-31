@@ -88,11 +88,15 @@ const RoleListPage = () => {
 
     }
 
-    useEffect(() => {
+    useEffect(()=>{
         dispatch(setPageTitle(t("admin:roleList")));
+        fetchPermissions()
+
+    },[])
+
+    useEffect(() => {
 
         fetchData()
-        fetchPermissions()
     }, [filters]);
 
     return (
