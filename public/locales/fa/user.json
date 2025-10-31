@@ -1,6 +1,10 @@
 {
-    "usersList": "لیست کابران",
-    "profile": {
-        "title": "پروفایل کاربری"
+    "user": {
+        "userList": "لیست کاربران",
+        "create": "ایجاد کاربر",
+        "update": "ویرایش کاربر {{name}}",
+        "search": "نام کاربر را جستجو کنید",
+        "change_status": "تغییر وضعیت",
+        "select_status": "انتخاب وضعیت"
     }
 }

@@ -20,7 +20,7 @@ interface AdminListTableProps {
     handleActionClick?: (action: string, row: any) => void
 }
 
-function AdminListTable(props: AdminListTableProps) {
+function UserListTable(props: AdminListTableProps) {
 
     const { list = null, total, page, take, handleActionClick = (action: string, row: any) => { }, onChangeFilters = (filters: any) => { } } = props
 
@@ -68,6 +68,7 @@ function AdminListTable(props: AdminListTableProps) {
                             </div>
                         ),
                     },
+
                     {
                         accessor: 'email',
                         title: `${t("email")}`,
@@ -75,7 +76,7 @@ function AdminListTable(props: AdminListTableProps) {
                         // sortable: true,
                         render: (user) => (
                             <span>
-                                    {user.email}
+                                {user.email}
                             </span>
                         ),
                     },
@@ -87,28 +88,8 @@ function AdminListTable(props: AdminListTableProps) {
                         // sortable: true,
                         render: (user) => (
                             <span>
-                                    {user.mobile}
+                                {user.mobile}
                             </span>
-                        ),
-                    },
-
-
-                    {
-                        accessor: 'roles',
-                        title: `${t("admin:admin.roles")}`,
-                        textAlignment: `${isRtl ? "right" : "left"}`,
-                        // sortable: true,
-                        render: (user) => (
-                            <div className="flex flex-wrap gap-4" >
-
-                                {user.roles.map((role: any, index: number) => (
-                                    <span className=" bg-primary text-white text-sm py-1 px-2 rounded-full" key={index}>
-                                        {role.name}
-                                    </span>
-                                ))}
-
-
-                            </div>
                         ),
                     },
                     {
@@ -135,7 +116,7 @@ function AdminListTable(props: AdminListTableProps) {
 
 
                                 <Protector requiredPermissions={['user-manage']}>
-                                    <button title="assign role" onClick={() => handleActionClick("assignRole", row)}>
+                                    <button title="change status" onClick={() => handleActionClick("changeStatus", row)}>
                                         <IconAt />
                                     </button>
                                 </Protector>
@@ -171,4 +152,4 @@ function AdminListTable(props: AdminListTableProps) {
     )
 }
 
-export default AdminListTable
+export default UserListTable

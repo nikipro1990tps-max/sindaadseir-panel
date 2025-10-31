@@ -121,8 +121,6 @@ const RolePermissionsModal = memo((props: RolePermissionsModalProps) => {
             onClose={closeHandler}
             onSubmit={handleSubmit}
             isLoading={loading}
-            submitText="ثبت"
-            cancelText="انصراف"
         >
             {/* Name Input */}
             <div className='mt-4 p-4'>

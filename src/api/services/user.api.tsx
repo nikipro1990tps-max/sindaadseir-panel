@@ -7,9 +7,9 @@ export const userApiService = {
     },
 
 
-    async users() {
+    async users(filters = {}) {
 
-        return await axiosApiCall.get("/user/admin")
+        return await axiosApiCall.get("/user/admin", filters)
 
     },
 

@@ -3,6 +3,7 @@ import { useState, Fragment, ReactNode, useEffect } from 'react';
 import IconXCircle from '../Icon/IconXCircle';
 import IconX from '../Icon/IconX';
 import { MyToast } from './MyToast';
+import { useTranslation } from 'react-i18next';
 
 // Define TypeScript interfaces
 interface ModalProps {
@@ -35,6 +36,7 @@ const MyModal: React.FC<ModalProps> = (props) => {
     } = props;
 
     const [state, setState] = useState({ isOpen: true, isLoading: false })
+    const {t} = useTranslation()
 
     useEffect(() => {
         setState({ isOpen, isLoading })
@@ -132,14 +134,14 @@ const MyModal: React.FC<ModalProps> = (props) => {
                                                 disabled={state.isLoading}
                                                 className="btn btn-outline-danger disabled:opacity-50"
                                             >
-                                                {cancelText}
+                                                {cancelText || `${t('cancel')}`}
                                             </button>
 
 
                                             <button disabled={state.isLoading}
                                                 type="button" className="btn btn-secondary btn-lg" onClick={handleSubmit}>
                                                 {state.isLoading && <span className="animate-spin border-2 border-white border-l-transparent rounded-full w-5 h-5 ltr:mr-4 rtl:ml-4 inline-block align-middle"></span>}
-                                                {submitText}
+                                                {submitText || `${t('submit')}`}
                                             </button>
 
 

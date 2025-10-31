@@ -33,8 +33,6 @@ const RoleModalSelectInput = memo((props: RolePermissionsModalProps) => {
             title={`${t("admin:admin.assign_rols")}`}
             onClose={closeHandler}
             onSubmit={() => submitHandler(selectedValues)}
-            submitText="ثبت"
-            cancelText="انصراف"
         >
 
             <RoleSelectInput
