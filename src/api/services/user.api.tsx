@@ -20,6 +20,12 @@ export const userApiService = {
     },
 
 
+    async profile() {
+
+        return await axiosApiCall.get(`/user/admin/profile`)
+
+    },
+
     async createAdmin(body = {}) {
 
         return await axiosApiCall.post(`/user/admin/admin`, body)
@@ -38,9 +44,9 @@ export const userApiService = {
 
     },
 
-    async updateProfile(userId: number, body = {}) {
+    async updateProfile( body = {}) {
 
-        return await axiosApiCall.put(`/user`)
+        return await axiosApiCall.put(`/user/admin/profile`,body)
 
     },
 

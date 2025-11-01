@@ -6,8 +6,6 @@ import { useSelector } from 'react-redux';
 import { IRootState } from '../../../store';
 
 
-
-
 function RoleSelectInput(props: any) {
 
     const { isMulti = true, value, onSelect = (value: any) => { } } = props

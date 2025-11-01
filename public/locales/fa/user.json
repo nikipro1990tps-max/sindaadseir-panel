@@ -6,5 +6,21 @@
         "search": "نام کاربر را جستجو کنید",
         "change_status": "تغییر وضعیت",
         "select_status": "انتخاب وضعیت"
+    },
+    "profile":{
+        "title":"پروفایل",
+        "profile_data":"پروفایل {{data}}",
+        "firstName": "نام", 
+        "lastName": "نام خانوادگی", 
+        "mobile":"شماره همراه",
+        "email": "ایمیل",
+        "birthdata":"تاریخ تولد",
+        "gender":"جنسیت",
+        "male": "مذکر",
+        "female": "مونث",
+        "password": "رمز عبور",
+        "confirm_password": "تأیید رمز عبور",
+        "roles": "نقش ها"
+
     }
 }
