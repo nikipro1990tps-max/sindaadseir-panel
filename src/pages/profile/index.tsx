@@ -19,4 +19,4 @@ const ProfilePage = () => {
     );
 };
 
-export default RoleListPage;
+export default ProfilePage;

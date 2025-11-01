@@ -122,9 +122,7 @@ function AdminListPage() {
             }
 
 
-            <h1 className='p-4 m-2'>{t('admin:role.roleList')}</h1>
-
-
+            <h1 className='p-4 text-lg font-bold'>{t('admin:admin.adminList')}</h1>
 
             {/* filters */}
             <div className='flex flex-wrap justify-between items-center gap-4 p-2 mb-4'>

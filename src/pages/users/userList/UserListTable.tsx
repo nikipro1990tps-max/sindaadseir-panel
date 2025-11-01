@@ -6,8 +6,6 @@ import { DataTable } from "mantine-datatable";
 import IconPencil from "../../../components/Icon/IconPencil";
 import IconTrash from "../../../components/Icon/IconTrash";
 import Protector from "../../../components/Protector";
-import IconPlus from "../../../components/Icon/IconPlus";
-import IconSquareRotated from "../../../components/Icon/IconSquareRotated";
 import IconAt from "../../../components/Icon/IconAt";
 
 
@@ -16,17 +14,20 @@ interface AdminListTableProps {
     total: number,
     page: number,
     take: number,
+    isLoading: boolean,
     onChangeFilters?: (filters: any) => void
     handleActionClick?: (action: string, row: any) => void
 }
 
 function UserListTable(props: AdminListTableProps) {
 
-    const { list = null, total, page, take, handleActionClick = (action: string, row: any) => { }, onChangeFilters = (filters: any) => { } } = props
+    const { list = null, total, isLoading = false, page, take, handleActionClick = (action: string, row: any) => { }, onChangeFilters = (filters: any) => { } } = props
 
     const isRtl = useSelector((state: IRootState) => state.themeConfig.rtlClass) === 'rtl' ? true : false;
 
     const { t } = useTranslation(["admin"])
+
+    const [isFetching, setFetching] = useState(false)
 
     const [rows, setRows] = useState<any[]>([])
     const [filters, setFilters] = useState({ page, take })
@@ -39,6 +40,10 @@ function UserListTable(props: AdminListTableProps) {
         setFilters({ ...filters, page, take })
     }, [page, take])
 
+    useEffect(() => {
+        setFetching(isLoading)
+    }, [isLoading])
+
     return (
         <div className="datatables" >
             <DataTable
@@ -46,8 +51,7 @@ function UserListTable(props: AdminListTableProps) {
                 highlightOnHover
                 className="whitespace-nowrap table-hover"
                 records={rows}
-
-
+                fetching={isFetching}
                 columns={[
                     {
                         accessor: 'index', textAlignment: `${isRtl ? "right" : "left"}`,

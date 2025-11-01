@@ -5,10 +5,8 @@ import AnimateHeight from 'react-animate-height';
 import IconCaretDown from '../Icon/IconCaretDown';
 import IconMenuDashboard from '../Icon/Menu/IconMenuDashboard';
 import Protector from '../Protector';
-import IconMenuChat from '../Icon/Menu/IconMenuChat';
 import { useSelector } from 'react-redux';
 import { IRootState } from '../../store';
-import { ReactNode, useEffect, useMemo, useState } from 'react';
 import IconMenuUsers from '../Icon/Menu/IconMenuUsers';
 
 interface SidebarElementsProps {

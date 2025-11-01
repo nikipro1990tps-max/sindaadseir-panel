@@ -54,7 +54,7 @@ const InputLabel = (props: InputLabelProps) => {
                     id={label}
                     type={type}
                     placeholder={placeholder}
-                    className={`form-input px-10 placeholder:text-white-dark ${inputClassName}`}
+                    className={`form-input ${icon? 'px-10' : 'pe-10'} placeholder:text-white-dark ${inputClassName}`}
                     onChange={(e) => handleChange(e.target.value)}
                 />
                 {icon && (

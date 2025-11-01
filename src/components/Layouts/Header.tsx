@@ -61,6 +61,8 @@ const Header = () => {
 
     const { t } = useTranslation(["auth"]);
 
+    const mapAccess : any = {"manager": `${t("manager")}`, "admin": `${t("admin")}`, "user" : `${t("user")}`}
+
     function doLogout(){
         dispatch(logout())
         navigation("/")
@@ -73,7 +75,7 @@ const Header = () => {
                     <div className="horizontal-logo flex lg:hidden justify-between items-center ltr:mr-2 rtl:ml-2">
 
 
-                        <Link to="/profile" className="main-logo flex items-center shrink-0">
+                        <Link to="/user-profile" className="main-logo ring-2 flex items-center shrink-0">
                             <img className="w-8 ltr:-ml-1 rtl:-mr-1 inline" src={user.avatar || "/assets/images/auth/user.png"} alt="logo" />
                             <span className="text-2xl ltr:ml-1.5 rtl:mr-1.5  font-semibold  align-middle hidden md:inline dark:text-white-light transition-all duration-300">VRISTO</span>
                         </Link>
@@ -367,7 +369,7 @@ const Header = () => {
                                             <div className="ltr:pl-4 rtl:pr-4 truncate">
                                                 <h4 className="text-base">
                                                    {user.name}
-                                                    <span className="text-xs bg-success-light rounded text-success px-1 ltr:ml-2 rtl:ml-2">{user.access}</span>
+                                                    <span className="text-xs mx-2 bg-success-light rounded text-success px-1 ltr:ml-2 rtl:ml-2">{mapAccess[user.access]}</span>
                                                 </h4>
                                                 {/* <button type="button" className="text-black/60 hover:text-primary dark:text-dark-light/60 dark:hover:text-white">
                                                     johndoe@gmail.com
@@ -376,7 +378,7 @@ const Header = () => {
                                         </div>
                                     </li>
                                     <li>
-                                        <Link to="/users/profile" className="dark:hover:text-white">
+                                        <Link to="/user-profile" className="dark:hover:text-white">
                                             <IconUser className="w-4.5 h-4.5 ltr:mr-2 rtl:ml-2 shrink-0" />
                                             Profile
                                         </Link>

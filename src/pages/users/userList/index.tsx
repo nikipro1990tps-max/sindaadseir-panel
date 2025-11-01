@@ -6,7 +6,6 @@ import { userApiService } from '../../../api/services/user.api';
 import { MyToast } from '../../../components/Elements/MyToast';
 import ConfirmAlert from '../../../components/Elements/ConfirmAlert';
 import InputLabel from '../../../components/Elements/InputLabel';
-import IconPlus from '../../../components/Icon/IconPlus';
 import UserModalChangeStatus from './UserModalChangeStatus';
 import UserModal from './UserModal';
 import UserListTable from './UserListTable';
@@ -19,21 +18,24 @@ function UserListPage() {
     const [statusModal, setStatusModal] = useState<any>(null)
     const [openUserModal, setOpenUserModal] = useState<any>(null)
     const [filters, setFilters] = useState({ name: "", page: 1, take: 10 })
-    const [list, setList] = useState({ data: [], count: 0 })
-
+    const [list, setList] = useState({ data: [], count: 0 , isLoading: false })
 
     async function fetchData() {
 
+
         try {
 
-            setList({ data: [], count: 0 })
+            setList({ data: [], count: 0 , isLoading : true })
 
             const { users, count } = await userApiService.users(filters)
 
-            setList({ data: users, count })
+            setList({ data: users, count , isLoading : false })
 
         } catch (error) {
             // do something
+
+            setList({ data: [], count: 0 , isLoading : false })
+
         }
     }
 
@@ -113,25 +115,26 @@ function UserListPage() {
             }
 
 
-            <h1 className='p-4 m-2'>{t('user:user.userList')}</h1>
-
+            <h1 className='p-4 text-lg font-bold'>{t('user:user.userList')}</h1>
 
 
             {/* filters */}
-            <div className='flex flex-wrap justify-between items-center gap-4 p-2 mb-4'>
+            <div className=' flex flex-wrap justify-between items-center gap-4 p-2 mb-4 '>
 
 
 
                 <InputLabel
+                    label={`${t("search_data", { data: `${t("name")}` })}`}
                     value={filters.name}
-                    placeholder={`${t('name')}`}
+                    placeholder={`${t("search_data", { data: `${t("name")}` })}`}
                     onChange={(name) => { setFilters({ ...filters, name }) }}
 
                 />
 
                 {/* <button type="button" className="btn btn-primary" onClick={() => setOpenUserModal(true)}>{t("add")}<IconPlus /></button> */}
-
             </div>
+
+            <div className='w-full mx-5 h-1 bg-black' />
 
 
 
@@ -140,11 +143,13 @@ function UserListPage() {
                 total={list.count}
                 page={filters.page}
                 take={filters.take}
+                isLoading={list.isLoading}
                 onChangeFilters={(filters: any) => { setFilters({ ...filters }) }}
                 handleActionClick={(action, row) => { handleActionClick(action, row) }}
             />
 
-        </div>
+
+        </div >
     );
 };
 
