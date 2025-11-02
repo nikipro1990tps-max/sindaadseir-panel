@@ -8,6 +8,8 @@ import InputLabelPassword from '../../components/Elements/InputLabelPassword';
 import { userApiService } from '../../api/services/user.api';
 import PerisanDatePicker from '../../components/Elements/PersianDatePicker';
 import { MyToast } from '../../components/Elements/MyToast';
+import ImageUploadButton from '../../components/Elements/ImageUploadButton';
+import { mediaApiService } from '../../api/services/media.api';
 
 const ProfilePage = () => {
     const dispatch = useDispatch();
@@ -24,7 +26,7 @@ const ProfilePage = () => {
 
             setUser(defaultUser)
             const user = await userApiService.profile()
-            setUser(user)
+            setUser({ ...user, avatar_src: user?.avatar || "/assets/images/auth/user.png" })
         } catch (error) {
 
         }
@@ -40,7 +42,7 @@ const ProfilePage = () => {
         e.preventDefault();
 
 
-        let body = {
+        let body: any = {
             firstName: user.firstName,
             lastName: user.lastName,
             mobile: user.mobile,
@@ -48,7 +50,9 @@ const ProfilePage = () => {
             birthdate: user.birthdate,
             gender: user.gender,
             password: user.password,
-            confirm_password: user.confirm_password
+            confirm_password: user.confirm_password,
+            avatar: user.avatar,
+            avatarId: null
         }
         if (!body.firstName || body.firstName.length < 1) {
             MyToast.error(`${t("atleast_characters", { n: "1", data: `${t('firstName')}` })}`)
@@ -77,17 +81,22 @@ const ProfilePage = () => {
                 MyToast.error(`${t("password_not_equal_confirm")}`)
                 return
             }
+
         } else if (!user.hasPassword) {
             MyToast.error(`${t("required_data", { data: `${t("password")}` })}`)
             return
         }
 
-        console.log(99999999, body)
+
 
 
         try {
 
             setLoading(true)
+            if (user.avatar) {
+                const { mediaId, url } = await mediaApiService.uploadFile(user.avatar)
+                body.avatarId = mediaId
+            }
             await userApiService.updateProfile(body)
 
             setLoading(false)
@@ -95,7 +104,20 @@ const ProfilePage = () => {
             MyToast.success(`${t("success_action")}`)
 
         } catch (error) {
+
+
+            // delete error avatar
+            if (body.avatarId) {
+                try {
+                    await mediaApiService.deleteFile(body.avatarId)
+                } catch (error) {
+                    // error delete avatar
+                }
+            }
+
             setLoading(false)
+
+
         }
     }
 
@@ -115,10 +137,17 @@ const ProfilePage = () => {
                 <div>
                     <form className="border border-[#ebedf2] dark:border-[#191e3a] rounded-md p-4 mb-5 bg-white dark:bg-black" onSubmit={submitForm}>
                         <div className="flex flex-col sm:flex-row">
-                            <div className="ltr:sm:mr-4 rtl:sm:ml-4 w-full sm:w-2/12 mb-5 text-center">
-                                <img src={user?.avatar || "/assets/images/auth/user.png"} alt="img" className="w-15 h-16 rounded-full object-cover mx-auto" />
-                                <h6 className="text-center text-lg font-bold mb-5">{user.firstName} {user.lastName}</h6>
+                            <div className="mb-5 mx-5 text-center">
+                                <img src={user.avatar_src} alt={`${user.firstName} ${user.lastName}`} className="w-[80px] h-[85px] ring-2 rounded-full object-cover mx-auto" />
+                                <h6 className="text-center text-lg font-bold mb-2">{user.firstName} {user.lastName}</h6>
                                 <span className="text-sm mx-2 bg-success-light rounded text-success px-1 ltr:ml-2 rtl:ml-2">{mapAccess[user.access]}</span>
+
+                                <div className='my-2'>
+                                    <ImageUploadButton
+                                        onImageSelect={(file, src) => { setUser({ ...user, avatar: file, avatar_src: src }) }}
+                                    />
+                                </div>
+
                             </div>
                             <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-5">
                                 <InputLabel
@@ -175,10 +204,10 @@ const ProfilePage = () => {
 
                                 <div className="sm:col-span-2 mt-3">
                                     <button type="submit" className="btn btn-primary" >
-                                        {loading ? <span className="animate-spin border-2 border-white border-l-transparent rounded-full w-5 h-5 ltr:mr-4 rtl:ml-4 inline-block align-middle" > {t("submit")}</span> :  <span>{t("submit")}</span>
+                                        {loading ? <span className="animate-spin border-2 border-white border-l-transparent rounded-full w-5 h-5 ltr:mr-4 rtl:ml-4 inline-block align-middle" > {t("submit")}</span> : <span>{t("submit")}</span>
                                         }
 
-                                       
+
                                     </button>
                                 </div>
                             </div>
