@@ -99,10 +99,10 @@ function AdminListTable(props: AdminListTableProps) {
                         textAlignment: `${isRtl ? "right" : "left"}`,
                         // sortable: true,
                         render: (user) => (
-                            <div className="flex flex-wrap gap-4" >
+                            <div className="flex flex-wrap gap-2 max-w-[100px]" >
 
                                 {user.roles.map((role: any, index: number) => (
-                                    <span className=" bg-primary text-white text-sm py-1 px-2 rounded-full" key={index}>
+                                    <span className=" bg-primary text-white text-xs p-1 rounded-full" key={index}>
                                         {role.name}
                                     </span>
                                 ))}
