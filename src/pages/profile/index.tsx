@@ -26,7 +26,8 @@ const ProfilePage = () => {
 
             setUser(defaultUser)
             const user = await userApiService.profile()
-            setUser({ ...user, avatar_src: user?.avatar || "/assets/images/auth/user.png" })
+            const {avatar, ...userItems} = user
+            setUser({ ...userItems, avatar_src: avatar || "/assets/images/auth/user.png" })
         } catch (error) {
 
         }
