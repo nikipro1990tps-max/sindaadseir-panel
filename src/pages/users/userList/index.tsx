@@ -6,7 +6,7 @@ import { userApiService } from '../../../api/services/user.api';
 import { MyToast } from '../../../components/Elements/MyToast';
 import ConfirmAlert from '../../../components/Elements/ConfirmAlert';
 import InputLabel from '../../../components/Elements/InputLabel';
-import UserModalChangeStatus from './UserModalChangeStatus';
+import UserModalChangeStatus from '../../../components/User/UserModalChangeStatus';
 import UserModal from './UserModal';
 import UserListTable from './UserListTable';
 

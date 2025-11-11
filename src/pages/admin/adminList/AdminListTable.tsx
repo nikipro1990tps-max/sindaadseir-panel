@@ -9,6 +9,7 @@ import Protector from "../../../components/Protector";
 import IconPlus from "../../../components/Icon/IconPlus";
 import IconSquareRotated from "../../../components/Icon/IconSquareRotated";
 import IconAt from "../../../components/Icon/IconAt";
+import IconPaperclip from "../../../components/Icon/IconPaperclip";
 
 
 interface AdminListTableProps {
@@ -75,7 +76,7 @@ function AdminListTable(props: AdminListTableProps) {
                         // sortable: true,
                         render: (user) => (
                             <span>
-                                    {user.email}
+                                {user.email}
                             </span>
                         ),
                     },
@@ -87,7 +88,7 @@ function AdminListTable(props: AdminListTableProps) {
                         // sortable: true,
                         render: (user) => (
                             <span>
-                                    {user.mobile}
+                                {user.mobile}
                             </span>
                         ),
                     },
@@ -135,8 +136,14 @@ function AdminListTable(props: AdminListTableProps) {
 
 
                                 <Protector requiredPermissions={['user-manage']}>
-                                    <button title="assign role" onClick={() => handleActionClick("assignRole", row)}>
+                                    <button title="change status" onClick={() => handleActionClick("changeStatus", row)}>
                                         <IconAt />
+                                    </button>
+                                </Protector>
+
+                                <Protector requiredPermissions={['user-manage']}>
+                                    <button title="assign role" onClick={() => handleActionClick("assignRole", row)}>
+                                        <IconPaperclip />
                                     </button>
                                 </Protector>
 

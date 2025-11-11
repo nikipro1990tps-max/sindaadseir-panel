@@ -10,6 +10,7 @@ import AdminModal from './AdminModal';
 import InputLabel from '../../../components/Elements/InputLabel';
 import IconPlus from '../../../components/Icon/IconPlus';
 import AdminListTable from './AdminListTable';
+import UserModalChangeStatus from '../../../components/User/UserModalChangeStatus';
 
 function AdminListPage() {
 
@@ -18,6 +19,7 @@ function AdminListPage() {
 
     const [assignRoleModal, setAssignRoleModal] = useState<any>(null)
     const [openAdminModal, setOpenAdminModal] = useState<any>(null)
+    const [statusModal, setStatusModal] = useState<any>(null)
     const [filters, setFilters] = useState({ name: "", page: 1, take: 10 })
     const [list, setList] = useState({ data: [], count: 0 })
 
@@ -75,8 +77,10 @@ function AdminListPage() {
 
 
     function handleActionClick(key: string, row: any) {
-
-        if (key == 'assignRole') {
+        
+        if (key == 'changeStatus') {
+            setStatusModal(row)
+        } else if (key == 'assignRole') {
             setAssignRoleModal(row)
         } else if (key == 'update') {
             setOpenAdminModal(row)
@@ -101,6 +105,17 @@ function AdminListPage() {
 
     return (
         <div className='panel'>
+
+            {statusModal &&
+                <UserModalChangeStatus
+
+                    userId={statusModal.id}
+                    status={statusModal.status}
+                    onClose={() => setStatusModal(null)}
+                    onSubmit={() => { fetchData() }}
+
+                />
+            }
 
             {assignRoleModal &&
                 <RoleModalSelectInput

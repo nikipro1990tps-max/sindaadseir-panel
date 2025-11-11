@@ -1,11 +1,11 @@
 import { memo, useEffect, useState } from "react"
-import MyModal from "../../../components/Elements/MyModal"
+import MyModal from "../Elements/MyModal"
 import { useTranslation } from "react-i18next"
 import Select from 'react-select';
 import { useSelector } from "react-redux"
-import { IRootState } from "../../../store"
-import { userApiService } from "../../../api/services/user.api";
-import { MyToast } from "../../../components/Elements/MyToast";
+import { IRootState } from "../../store"
+import { userApiService } from "../../api/services/user.api";
+import { MyToast } from "../Elements/MyToast";
 
 
 interface ChaneStatusModalProps {
