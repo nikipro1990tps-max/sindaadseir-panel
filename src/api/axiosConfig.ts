@@ -6,10 +6,11 @@ interface ApiConfig {
   timeout: number;
 }
 
+
 // ایجاد پیکربندی
 const apiConfig: ApiConfig = {
-  baseURL: 'http://localhost:3070/api', // process.env.REACT_APP_API_URL || 'http://localhost:3001/api',
-  timeout: 10000 // parseInt(process.env.REACT_APP_API_TIMEOUT || '10000', 10)
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3000/api',
+  timeout: parseInt(import.meta.env.VITE_API_TIMEOUT || '10000', 10)
 };
 
 // ایجاد axios instance
