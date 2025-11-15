@@ -43,9 +43,14 @@ jobs:
           # Update remote URL to use HTTPS (credentials will be read from .git-credentials)
           git remote set-url origin https://github.com/${{ github.repository }}.git
           
+          # Discard any local changes to ensure clean deployment
+          git reset --hard HEAD || true
+          git clean -fd || true
           
-          # Pull latest changes
-          git pull origin ${{ github.ref_name }}
+          # Fetch latest changes and reset to match remote exactly
+          git fetch origin ${{ github.ref_name }}
+          git reset --hard origin/${{ github.ref_name }}
+          git clean -fd
           
           npm i
           npm run build
