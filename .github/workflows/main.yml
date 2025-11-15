@@ -40,6 +40,9 @@ jobs:
           # Update remote URL to use HTTPS (credentials will be read from .git-credentials)
           git remote set-url origin https://github.com/${{ github.repository }}.git
           
+          # Add repository to safe directory list to avoid ownership issues
+          git config --global --add safe.directory /var/www/panel/sindaadseir-panel
+          
           # Pull latest changes
           git pull origin ${{ github.ref_name }}
           
