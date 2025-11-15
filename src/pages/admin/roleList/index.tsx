@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { roleApiService } from '../../../api/services/role.api';
 import InputLabel from '../../../components/Elements/InputLabel';
 import IconPlus from '../../../components/Icon/IconPlus';
-import RolePermissionsModal from './roleModal'
+import RolePermissionsModal from './RoleModal'
 import RoleListTable from './RoleListTable';
 import ConfirmAlert from '../../../components/Elements/ConfirmAlert';
 import { MyToast } from '../../../components/Elements/MyToast';
