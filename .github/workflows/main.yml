@@ -52,6 +52,15 @@ jobs:
           git reset --hard origin/${{ github.ref_name }}
           git clean -fd
           
+          # Load NVM and use Node.js
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+          [ -s "$NVM_DIR/nvm.sh" ] && nvm use 22 || nvm use node || true
+          
+          # Verify Node.js and npm are available
+          node --version
+          npm --version
+          
           npm i
           npm run build
           sudo systemctl reload nginx
