@@ -63,6 +63,8 @@ jobs:
           
           npm i
           npm run build
-          sudo systemctl reload nginx
+          
+          # Test nginx configuration and reload (graceful, doesn't drop connections)
+          sudo nginx -t && sudo systemctl reload nginx
           
           echo "Panel deployed successfully!"
