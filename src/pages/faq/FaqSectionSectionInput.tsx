@@ -6,7 +6,7 @@ import MySelectInput from '../../components/Elements/MySelectInput';
 
 function FaqSectionSelectInput(props: any) {
 
-    const { isClearable = false, value, sectionId, onSelect = (value: any) => { } } = props
+    const { isClearable = false, value,  onSelect = (value: any) => { } } = props
 
     const { t } = useTranslation(['faq'])
 
@@ -18,9 +18,7 @@ function FaqSectionSelectInput(props: any) {
 
         try {
             const { sections } = await faqApiService.sections()
-            // if (sectionId) {
-            //     setSelectedValue(sections.find((x: any) => x.id == sectionId))
-            // }
+      
             setList(sections)
         } catch (error) {
 
