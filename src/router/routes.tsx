@@ -3,10 +3,11 @@ const Index = lazy(() => import('../pages/Index'));
 const AdminList = lazy(() => import('../pages/admin/adminList'));
 const RoleList = lazy(() => import('../pages/admin/roleList'));
 const UserList = lazy(() => import('../pages/users/userList'));
+const FaqList = lazy(() => import('../pages/faq/faqList'));
 const Profile = lazy(() => import('../pages/profile'));
 
 
-const routes= [
+const routes = [
     // dashboard
     {
         name: 'dashboard',
@@ -36,6 +37,13 @@ const routes= [
     },
 
     {
+        name: 'faq',
+        path: '/faq',
+        element: <FaqList />,
+        permissions: ["faq-manager", "faq-list"],
+    },
+
+    {
         name: 'profile',
         path: '/user-profile',
         element: <Profile />,
@@ -43,7 +51,7 @@ const routes= [
 
 ];
 
-const FindRouteByName = (name: string)  => {
+const FindRouteByName = (name: string) => {
     return routes.find(x => x.name == name) || {}
 }
 

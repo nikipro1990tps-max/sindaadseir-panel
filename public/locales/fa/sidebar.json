@@ -1,14 +1,16 @@
 {
     "dashboard": "داشبورد",
-
     "admin": {
         "title": "مدیران",
         "adminList": "لیست مدیران",
         "roleList": "نقش ها"
     },
-
     "users": {
         "title": "کاربران",
         "userList": "لیست کاربران"
+    },
+    "faq": {
+        "title": "سوالات متدوال",
+        "faqList": "لیست سوالات متدوال"
     }
 }

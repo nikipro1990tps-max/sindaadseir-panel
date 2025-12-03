@@ -25,7 +25,7 @@ const SidebarElements: React.FC<SidebarElementsProps> = (props) => {
             title: t('sidebar:dashboard'),
             icon: <IconMenuDashboard className="group-hover:!text-primary shrink-0" />,
             ...FindRouteByName('dashboard'),
-         
+
         },
         {
             title: t('sidebar:admin.title'),
@@ -47,7 +47,13 @@ const SidebarElements: React.FC<SidebarElementsProps> = (props) => {
             title: t('sidebar:users.title'),
             icon: <IconMenuUsers className="group-hover:!text-primary shrink-0" />,
             ...FindRouteByName('users'),
-         
+
+        },
+        {
+            title: t('sidebar:faq.title'),
+            icon: <IconMenuUsers className="group-hover:!text-primary shrink-0" />,
+            ...FindRouteByName('faq'),
+
         },
     ]
 

@@ -3,12 +3,12 @@ import { useTranslation } from "react-i18next"
 import { useSelector } from "react-redux";
 import { IRootState } from "../../store";
 import { useEffect, useState } from "react";
+import MySelectInput from '../../components/Elements/MySelectInput';
 
 function GenderSelectInput(props: any) {
     const { value = "male", onSelect = (value: any) => { } } = props
 
     const { t } = useTranslation(["user"])
-    const isRtl = useSelector((state: IRootState) => state.themeConfig.rtlClass) === 'rtl' ? true : false;
 
     const [selectedValue, setSelectedValue] = useState<any>(null)
 
@@ -22,25 +22,18 @@ function GenderSelectInput(props: any) {
     }, [value])
 
     return (
-        <div>
 
-            <label htmlFor="select_gener">{t("user:profile.gender")}</label>
-
-            <Select
-                inputId='select_gener'
-                value={selectedValue}
-                placeholder={`${t("admin:role.role")}`}
-                options={options}
-                isMulti={false}
-                isRtl={isRtl}
-                isClearable={true}
-                isSearchable={false}
-                closeMenuOnSelect={true}
-                
-                onChange={(row) => { onSelect(row.value) }}
-            />
-
-        </div>
+        <MySelectInput
+            options={options}
+            value={selectedValue}
+            inputId="select_gender"
+            title={t("user:profile.gender")}
+            placeholder={`${t("user:profile.gender")}`}
+            valueKey="value"
+            labelKey="label"
+            onChange={(row: any) => { onSelect(row.value) }}
+        />
+        
 
     )
 

@@ -17,6 +17,8 @@
     "active": "فعال",
     "blocked": "بلاک",
     "add": "افزودن",
+    "create": "ایجاد",
+    "update": "ویرایش",
     "tabe_status": "نمایش {{first}} تا {{end}} از {{total}} داده",
     "empty_records": "رکوردی ثبت نشده است",
     "search": "جستجو",
