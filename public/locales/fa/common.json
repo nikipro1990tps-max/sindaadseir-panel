@@ -10,6 +10,7 @@
     "lastName": "نام خانوادگی",
     "name": "نام",
     "title": "عنوان",
+    "description": "توضیحات",
     "atleast_characters": "حداقل {{n}} کاراکتر برای {{data}} لازم است",
     "enter_data": "{{data}} را وارد کنید",
     "action": "عملیات",

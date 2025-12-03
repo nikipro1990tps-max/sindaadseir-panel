@@ -8,6 +8,7 @@ import FaqModal from "./FaqModal";
 import InputLabel from "../../../components/Elements/InputLabel";
 import IconPlus from "../../../components/Icon/IconPlus";
 import FaqSectionSelectInput from "../FaqSectionSectionInput";
+import FaqSectionListModal from "../section/FaqListSectionModal";
 
 function FaqList() {
 
@@ -16,6 +17,8 @@ function FaqList() {
     const [items, setItems] = useState({ list: [], total: 0 })
     const [filters, setFilters] = useState({ search: "", page: 1, take: 10, sectionId: "" })
     const [faqModal, setFaqModal] = useState<any>(null)
+    const [sectionManageModal, setSectionManageModal] = useState(false)
+    const [refreshState, setRefereshState] = useState<any>(null)
 
     async function fetch() {
 
@@ -78,6 +81,17 @@ function FaqList() {
                 />
             }
 
+            {
+                sectionManageModal &&
+                <FaqSectionListModal
+                    onSubmit={() => { setRefereshState(Date.now()) }}
+
+                    onClose={() => setSectionManageModal(false)}
+
+                />
+
+            }
+
 
             <h1 className='p-4 text-lg font-bold'>{t('faq:faq_list')}</h1>
 
@@ -99,6 +113,7 @@ function FaqList() {
                     <div className="min-w-[220px] flex-1 z-50">
 
                         <FaqSectionSelectInput
+                            refresh={refreshState}
                             isClearable={true}
                             onSelect={(value: any) => { setFilters({ ...filters, sectionId: value?.id }) }}
                         />
@@ -106,6 +121,7 @@ function FaqList() {
 
                 </div>
 
+                <button type="button" className="btn btn-success" onClick={() => setSectionManageModal(true)}>{t("faq:manage_sections")}</button>
                 <button type="button" className="btn btn-primary" onClick={() => setFaqModal(true)}>{t("add")}<IconPlus /></button>
 
             </div>

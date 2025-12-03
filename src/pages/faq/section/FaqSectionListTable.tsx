@@ -7,7 +7,7 @@ import IconPencil from "../../../components/Icon/IconPencil"
 import { useTranslation } from "react-i18next"
 import Protector from "../../../components/Protector"
 
-interface FaqListTableProps {
+interface FaqSectionListTableProps {
     list: any[],
     total: number,
     page: number,
@@ -16,13 +16,13 @@ interface FaqListTableProps {
     handleActionClick?: (action: string, row: any) => void
 }
 
-function FaqListTable(props: FaqListTableProps) {
+function FaqSectionListTable(props: FaqSectionListTableProps) {
 
     const {
         list = null,
         total = 0,
         page = 1,
-        take = 10,
+        take = 8,
         handleActionClick = (action: string, row: any) => { },
         onChangeFilters = (filters: any) => { }
     } = props
@@ -57,21 +57,21 @@ function FaqListTable(props: FaqListTableProps) {
                         title: `#`, render: ({ id }) => <strong className="text-info text-center">#{rows.findIndex(x => x.id == id) * page + 1}</strong>
                     },
                     {
-                        accessor: 'question',
-                        title: `${t("faq:question")}`,
+                        accessor: 'title',
+                        title: `${t("title")}`,
                         textAlignment: `${isRtl ? "right" : "left"}`,
                         // sortable: true,
-                        render: ({ question }) => (
-                            <p className='text-center dark:text-white text-black truncate max-w-[200px]'>{question}</p>
+                        render: ({ title }) => (
+                            <p className='text-center dark:text-white text-black truncate max-w-[200px]'>{title}</p>
                         ),
                     },
                     {
-                        accessor: 'answer',
-                        title: `${t("faq:answer")}`,
+                        accessor: 'description',
+                        title: `${t("description")}`,
                         textAlignment: `${isRtl ? "right" : "left"}`,
                         // sortable: true,
-                        render: ({ answer }) => (
-                            <p className='text-center dark:text-white text-black truncate max-w-[100px]'>{answer}</p>
+                        render: ({ description }) => (
+                            <p className='text-center dark:text-white text-black truncate max-w-[100px]'>{description}</p>
                         ),
                     },
                     {
@@ -157,4 +157,4 @@ function FaqListTable(props: FaqListTableProps) {
 
 }
 
-export default FaqListTable
+export default FaqSectionListTable

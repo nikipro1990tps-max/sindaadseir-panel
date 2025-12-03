@@ -7,15 +7,19 @@ export const faqApiService = {
      * faq sections services
      */
 
-    async sections() {
-        return await axiosApiCall.get('/faq/admin/section')
+    async sections(filters = {}) {
+        return await axiosApiCall.get('/faq/admin/section', filters)
+    },
+
+    async showSection(sectionId: number) {
+        return await axiosApiCall.get(`/faq/admin/section/${sectionId}`)
     },
 
     async createSection(body = {}) {
         return await axiosApiCall.post('/faq/admin/section', body)
     },
 
-    async updateSectiom(sectionId: number, body = {}) {
+    async updateSection(sectionId: number, body = {}) {
         return await axiosApiCall.put(`/faq/admin/section/${sectionId}`, body)
     },
 

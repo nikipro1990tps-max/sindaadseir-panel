@@ -6,7 +6,7 @@ import MySelectInput from '../../components/Elements/MySelectInput';
 
 function FaqSectionSelectInput(props: any) {
 
-    const { isClearable = false, value,  onSelect = (value: any) => { } } = props
+    const {refresh = false, isClearable = false, value,  onSelect = (value: any) => { } } = props
 
     const { t } = useTranslation(['faq'])
 
@@ -27,14 +27,16 @@ function FaqSectionSelectInput(props: any) {
 
     useEffect(() => {
 
-        fetch()
-
         if (value) {
             setSelectedValue(value)
         }
 
     }, [value])
 
+
+    useEffect(()=>{
+        fetch()
+    },[refresh])
 
 
 
