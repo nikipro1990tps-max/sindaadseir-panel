@@ -3,7 +3,6 @@ import { MyToast } from "../../../components/Elements/MyToast"
 import { useTranslation } from "react-i18next"
 import { roleApiService } from "../../../api/services/role.api"
 import MyModal from "../../../components/Elements/MyModal"
-import InputLabel from "../../../components/Elements/InputLabel"
 import FloatingInput from "../../../components/Elements/FloatingInput"
 
 interface Permission {

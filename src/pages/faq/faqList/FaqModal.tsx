@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react"
 import MyModal from "../../../components/Elements/MyModal"
 import { useTranslation } from "react-i18next"
-import TextAreaLabel from "../../../components/Elements/TextAreaLabel"
 import { faqApiService } from "../../../api/services/faq.api"
 import { MyToast } from "../../../components/Elements/MyToast"
 import FaqSectionSelectInput from "../FaqSectionSectionInput"
@@ -97,7 +96,7 @@ function FaqModal(props: any) {
                 />
 
                 <FloatingInput
-                    containerClassName="my-4"
+                    containerClassName="my-5"
                     label={t("faq:question")}
                     value={state.question}
                     onChange={(e) => setState({ ...state, question: e.target.value })}

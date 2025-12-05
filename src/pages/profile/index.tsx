@@ -8,7 +8,7 @@ import PerisanDatePicker from '../../components/Elements/PersianDatePicker';
 import { MyToast } from '../../components/Elements/MyToast';
 import ImageUploadButton from '../../components/Elements/ImageUploadButton';
 import { mediaApiService } from '../../api/services/media.api';
-import FloatingInput from '../../components/Elements/FloatingInput';
+import FloatingInput from "../../components/Elements/FloatingInput"
 
 const ProfilePage = () => {
     const dispatch = useDispatch();
@@ -164,7 +164,6 @@ const ProfilePage = () => {
 
                                 <FloatingInput
                                     label={`${t("user:profile.mobile")}`}
-                                    placeholder={`${t('enter_data', { data: `${t('user:profile.mobile')}` })}`}
                                     value={user?.mobile || ""}
                                     onChange={(e) => updateUser("mobile", e.target.value)}
                                 />
@@ -189,7 +188,6 @@ const ProfilePage = () => {
 
                                 <FloatingInput
                                     label={`${t("user:profile.password")}`}
-                                    placeholder={`${t("user:profile.password")}`}
                                     type='password'
                                     onChange={(e) => updateUser("password", e.target.value)}
                                 />

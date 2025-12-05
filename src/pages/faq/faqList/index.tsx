@@ -8,7 +8,7 @@ import FaqModal from "./FaqModal";
 import IconPlus from "../../../components/Icon/IconPlus";
 import FaqSectionSelectInput from "../FaqSectionSectionInput";
 import FaqSectionListModal from "../section/FaqListSectionModal";
-import FloatingInput from "../../../components/Elements/FloatingInput";
+import FloatingInput from "../../../components/Elements/FloatingInput"
 
 function FaqList() {
 

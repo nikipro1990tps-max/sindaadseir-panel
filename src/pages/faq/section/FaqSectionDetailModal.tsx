@@ -82,6 +82,7 @@ function FaqSectionDetailModal(props: any) {
 
                 <FloatingInput
                     label={t("title")}
+                    containerClassName="mb-5"
                     value={state.title}
                     onChange={(e) => setState({ ...state, title: e.target.value })}
                 />
@@ -89,6 +90,7 @@ function FaqSectionDetailModal(props: any) {
 
                 <FloatingInput
                     label={t("description")}
+                    multiline={true}
                     value={state.description}
                     onChange={(e) => setState({ ...state, description: e.target.value })}
                 />

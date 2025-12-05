@@ -8,7 +8,7 @@ import RolePermissionsModal from './RoleModal'
 import RoleListTable from './RoleListTable';
 import ConfirmAlert from '../../../components/Elements/ConfirmAlert';
 import { MyToast } from '../../../components/Elements/MyToast';
-import FloatingInput from '../../../components/Elements/FloatingInput';
+import FloatingInput from "../../../components/Elements/FloatingInput"
 
 const RoleListPage = () => {
 

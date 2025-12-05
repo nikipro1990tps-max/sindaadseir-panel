@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import MyModal from "../../../components/Elements/MyModal"
 import { useTranslation } from "react-i18next"
-import InputLabel from "../../../components/Elements/InputLabel"
 import { MyToast } from "../../../components/Elements/MyToast"
 import { userApiService } from "../../../api/services/user.api"
 import FloatingInput from "../../../components/Elements/FloatingInput"
