@@ -3,12 +3,12 @@ import { useEffect, useState } from "react";
 import { setPageTitle } from '../../../store/themeConfigSlice';
 import { useTranslation } from 'react-i18next';
 import { roleApiService } from '../../../api/services/role.api';
-import InputLabel from '../../../components/Elements/InputLabel';
 import IconPlus from '../../../components/Icon/IconPlus';
 import RolePermissionsModal from './RoleModal'
 import RoleListTable from './RoleListTable';
 import ConfirmAlert from '../../../components/Elements/ConfirmAlert';
 import { MyToast } from '../../../components/Elements/MyToast';
+import FloatingInput from '../../../components/Elements/FloatingInput';
 
 const RoleListPage = () => {
 
@@ -118,10 +118,10 @@ const RoleListPage = () => {
             {/* filters */}
             <div className='flex flex-wrap justify-between items-center gap-4 p-2 mb-4'>
 
-                <InputLabel
+                <FloatingInput
                     value={filters.search}
-                    placeholder={`${t('admin:role.search')}`}
-                    onChange={(search) => { setFilters({ ...filters, search }) }}
+                    label={`${t('admin:role.search')}`}
+                    onChange={(e) => { setFilters({ ...filters, search: e.target.value }) }}
 
                 />
 

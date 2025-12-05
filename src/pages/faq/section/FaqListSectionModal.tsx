@@ -38,7 +38,7 @@ function FaqSectionListModal(props: any) {
 
             ConfirmAlert({
                 title: t("delete_title", { item: row.title }),
-                text: t("sure_delete_text", { item: row.title }),
+                text: t("alert_section_delete"),
                 onConfirm: async () => {
                     try {
 

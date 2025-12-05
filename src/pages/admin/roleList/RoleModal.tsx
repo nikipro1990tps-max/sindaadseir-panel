@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next"
 import { roleApiService } from "../../../api/services/role.api"
 import MyModal from "../../../components/Elements/MyModal"
 import InputLabel from "../../../components/Elements/InputLabel"
+import FloatingInput from "../../../components/Elements/FloatingInput"
 
 interface Permission {
     key: string;
@@ -124,11 +125,10 @@ const RolePermissionsModal = memo((props: RolePermissionsModalProps) => {
         >
             {/* Name Input */}
             <div className='mt-4 p-4'>
-                <InputLabel
+                <FloatingInput
                     label={t('name')}
-                    placeholder={`${t('enter_data', { data: `${t('name')}` })}`}
                     value={role.name}
-                    onChange={(name: string) => setRole((prev: any) => ({ ...prev, name }))}
+                    onChange={(e) => setRole((prev: any) => ({ ...prev, name: e.target.value }))}
                 />
             </div>
 

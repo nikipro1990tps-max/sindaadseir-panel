@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react"
 import MyModal from "../../../components/Elements/MyModal"
 import { useTranslation } from "react-i18next"
-import InputLabel from "../../../components/Elements/InputLabel"
-import TextAreaLabel from "../../../components/Elements/TextAreaLabel"
 import { faqApiService } from "../../../api/services/faq.api"
 import { MyToast } from "../../../components/Elements/MyToast"
+import FloatingInput from "../../../components/Elements/FloatingInput"
 
 function FaqSectionDetailModal(props: any) {
 
@@ -81,19 +80,17 @@ function FaqSectionDetailModal(props: any) {
 
             <div >
 
-                <InputLabel
-                    placeholder={t("title")}
+                <FloatingInput
                     label={t("title")}
                     value={state.title}
-                    onChange={(value) => setState({ ...state, title: value })}
+                    onChange={(e) => setState({ ...state, title: e.target.value })}
                 />
 
 
-                <TextAreaLabel
-                    placeholder={t("description")}
+                <FloatingInput
                     label={t("description")}
                     value={state.description}
-                    onChange={(value) => setState({ ...state, description: value })}
+                    onChange={(e) => setState({ ...state, description: e.target.value })}
                 />
             </div>
 

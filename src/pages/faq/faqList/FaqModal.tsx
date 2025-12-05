@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react"
 import MyModal from "../../../components/Elements/MyModal"
 import { useTranslation } from "react-i18next"
-import InputLabel from "../../../components/Elements/InputLabel"
 import TextAreaLabel from "../../../components/Elements/TextAreaLabel"
 import { faqApiService } from "../../../api/services/faq.api"
 import { MyToast } from "../../../components/Elements/MyToast"
 import FaqSectionSelectInput from "../FaqSectionSectionInput"
+import FloatingInput from "../../../components/Elements/FloatingInput"
 
 function FaqModal(props: any) {
 
@@ -91,25 +91,24 @@ function FaqModal(props: any) {
             <div >
 
                 <FaqSectionSelectInput
-
                     value={state.section}
                     onSelect={(value: any) => setState({ ...state, section: value })}
 
                 />
 
-                <InputLabel
-                    placeholder={t("faq:question")}
+                <FloatingInput
+                    containerClassName="my-4"
                     label={t("faq:question")}
                     value={state.question}
-                    onChange={(value) => setState({ ...state, question: value })}
+                    onChange={(e) => setState({ ...state, question: e.target.value })}
                 />
 
 
-                <TextAreaLabel
-                    placeholder={t("faq:answer")}
+                <FloatingInput
                     label={t("faq:answer")}
                     value={state.answer}
-                    onChange={(value) => setState({ ...state, answer: value })}
+                    multiline={true}
+                    onChange={(e) => setState({ ...state, answer: e.target.value })}
                 />
             </div>
 

@@ -1,0 +1,490 @@
+.floating-container {
+  --primary-color: #1976d2;
+  --primary-hover: #1565c0;
+  --error-color: #d32f2f;
+  --success-color: #2e7d32;
+  --warning-color: #ed6c02;
+  --text-primary: rgba(0, 0, 0, 0.87);
+  --text-secondary: rgba(0, 0, 0, 0.6);
+  --text-disabled: rgba(0, 0, 0, 0.38);
+  --border-color: rgba(0, 0, 0, 0.23);
+  --border-hover: rgba(0, 0, 0, 0.87);
+  --border-focused: #1976d2;
+  --background-default: #fff;
+  --background-paper: #f5f5f5;
+  --background-filled: rgba(0, 0, 0, 0.06);
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 24px;
+  --border-radius: 4px;
+  --border-radius-lg: 8px;
+  --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  font-family: var(--font-family);
+  position: relative;
+  box-sizing: border-box;
+}
+
+.floating-full-width {
+  width: 100%;
+}
+
+.floating-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: text;
+  min-height: 56px;
+}
+
+.floating-state-disabled .floating-wrapper {
+  cursor: not-allowed;
+}
+
+.floating-state-readonly .floating-wrapper {
+  cursor: default;
+}
+
+.floating-input-wrapper {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.floating-has-password .floating-input-wrapper {
+  position: relative;
+}
+
+.floating-label {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  pointer-events: none;
+  transition: var(--transition);
+  transform-origin: left top;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 48px);
+  padding: 0 var(--spacing-sm);
+  background: transparent;
+  z-index: 1;
+}
+
+.floating-label-float {
+  top: -6px;
+  transform: scale(0.75);
+  color: var(--primary-color);
+  font-weight: 500;
+  background: var(--background-default);
+  padding: 0 var(--spacing-xs);
+  margin-left: calc(var(--spacing-sm) - var(--spacing-xs));
+  z-index: 2;
+}
+
+.floating-state-error .floating-label-float {
+  color: var(--error-color);
+}
+
+.floating-state-disabled .floating-label {
+  color: var(--text-disabled);
+}
+
+.floating-input-element {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  margin-top: var(--spacing-sm);
+  color: var(--text-primary);
+  padding: var(--spacing-sm);
+  box-sizing: border-box;
+  transition: var(--transition);
+}
+
+.floating-input-password {
+  padding-right: 48px !important;
+}
+
+.floating-input {
+  height: 100%;
+}
+
+.floating-textarea {
+  resize: vertical;
+  min-height: 32px;
+  padding-top: var(--spacing-xl);
+  padding-bottom: var(--spacing-sm);
+}
+
+.floating-input-element::placeholder {
+  color: var(--text-secondary);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.floating-input-element:focus::placeholder {
+  opacity: 1;
+}
+
+.floating-input-element:disabled {
+  color: var(--text-disabled);
+  -webkit-text-fill-color: var(--text-disabled);
+  opacity: 1;
+}
+
+.floating-input-element:read-only {
+  cursor: default;
+}
+
+.floating-placeholder-label {
+  position: absolute;
+  left: var(--spacing-sm);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  pointer-events: none;
+  opacity: 0;
+  transition: var(--transition);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 48px);
+}
+
+.floating-placeholder-label-visible {
+  opacity: 1;
+}
+
+.floating-state-focused .floating-placeholder-label,
+.floating-state-has-value .floating-placeholder-label {
+  opacity: 0;
+}
+
+.floating-variant-outlined .floating-input-wrapper {
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 0;
+}
+
+.floating-variant-outlined .floating-label-float {
+  margin-left: calc(var(--spacing-sm) - var(--spacing-xs));
+}
+
+.floating-variant-outlined:hover .floating-input-wrapper {
+  border-color: var(--border-hover);
+}
+
+.floating-state-focused.floating-variant-outlined .floating-input-wrapper {
+  border-width: 2px;
+  border-color: var(--primary-color);
+}
+
+.floating-state-error.floating-variant-outlined .floating-input-wrapper {
+  border-color: var(--error-color);
+  border-width: 2px;
+}
+
+.floating-state-focused.floating-state-error.floating-variant-outlined .floating-input-wrapper {
+  border-color: var(--error-color);
+}
+
+.floating-variant-filled .floating-input-wrapper {
+  background: var(--background-filled);
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
+  padding: 0;
+  position: relative;
+}
+
+.floating-variant-filled .floating-input-wrapper::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--border-color);
+  transition: var(--transition);
+}
+
+.floating-variant-filled .floating-input-wrapper::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--primary-color);
+  transform: scaleX(0);
+  transition: var(--transition);
+}
+
+.floating-variant-filled:hover .floating-input-wrapper::after {
+  background: var(--border-hover);
+  height: 2px;
+}
+
+.floating-state-focused.floating-variant-filled .floating-input-wrapper::before {
+  transform: scaleX(1);
+}
+
+.floating-state-error.floating-variant-filled .floating-input-wrapper::after {
+  background: var(--error-color);
+  height: 2px;
+}
+
+.floating-state-error.floating-variant-filled .floating-input-wrapper::before {
+  background: var(--error-color);
+}
+
+.floating-variant-standard .floating-input-wrapper::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--border-color);
+  transition: var(--transition);
+}
+
+.floating-variant-standard .floating-input-wrapper::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--primary-color);
+  transform: scaleX(0);
+  transition: var(--transition);
+}
+
+.floating-variant-standard:hover .floating-input-wrapper::after {
+  background: var(--border-hover);
+  height: 2px;
+}
+
+.floating-state-focused.floating-variant-standard .floating-input-wrapper::before {
+  transform: scaleX(1);
+}
+
+.floating-state-error.floating-variant-standard .floating-input-wrapper::after {
+  background: var(--error-color);
+  height: 2px;
+}
+
+.floating-state-error.floating-variant-standard .floating-input-wrapper::before {
+  background: var(--error-color);
+}
+
+.floating-start-adornment,
+.floating-end-adornment {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  padding: 0 var(--spacing-sm);
+  flex-shrink: 0;
+}
+
+.floating-has-start-adornment .floating-input-element {
+  padding-left: 0;
+}
+
+.floating-has-end-adornment .floating-input-element {
+  padding-right: 0;
+}
+
+.floating-state-disabled .floating-start-adornment,
+.floating-state-disabled .floating-end-adornment {
+  color: var(--text-disabled);
+}
+
+.floating-password-eye {
+  position: absolute;
+  right: var(--spacing-sm);
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: var(--spacing-xs);
+  cursor: pointer;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  border-radius: var(--border-radius);
+  width: 32px;
+  height: 32px;
+  z-index: 3;
+}
+
+.floating-password-eye:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--text-primary);
+}
+
+.floating-password-eye:active:not(:disabled) {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.floating-password-eye:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.floating-password-eye:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.eye-icon {
+  transition: var(--transition);
+  color: currentColor;
+}
+
+.eye-icon-visible {
+  color: var(--primary-color);
+}
+
+.floating-helper-container {
+  margin-top: var(--spacing-xs);
+  padding: 0 var(--spacing-sm);
+  min-height: 20px;
+}
+
+.floating-error-text {
+  color: var(--error-color);
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.66;
+}
+
+.floating-helper-text {
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.66;
+}
+
+.floating-state-disabled .floating-helper-text {
+  color: var(--text-disabled);
+}
+
+.floating-required {
+  color: var(--error-color);
+  margin-left: 2px;
+}
+
+[dir="rtl"] .floating-label {
+  left: auto;
+  right: 0;
+  transform-origin: right top;
+}
+
+[dir="rtl"] .floating-label-float {
+  margin-left: 0;
+  margin-right: calc(var(--spacing-sm) - var(--spacing-xs));
+}
+
+[dir="rtl"] .floating-placeholder-label {
+  left: auto;
+  right: var(--spacing-sm);
+}
+
+[dir="rtl"] .floating-has-start-adornment .floating-input-element {
+  padding-left: initial;
+  padding-right: 0;
+}
+
+[dir="rtl"] .floating-has-end-adornment .floating-input-element {
+  padding-right: initial;
+  padding-left: 0;
+}
+
+[dir="rtl"] .floating-password-eye {
+  right: auto;
+  left: var(--spacing-sm);
+}
+
+[dir="rtl"] .floating-input-password {
+  padding-right: var(--spacing-sm) !important;
+  padding-left: 48px !important;
+}
+
+.floating-input-element:focus {
+  outline: none;
+}
+
+.floating-state-focused .floating-input-wrapper {
+  outline: 2px solid transparent;
+}
+
+@media (prefers-color-scheme: dark) {
+  .floating-container {
+    --primary-color: #90caf9;
+    --primary-hover: #42a5f5;
+    --error-color: #f44336;
+    --text-primary: rgba(255, 255, 255, 0.87);
+    --text-secondary: rgba(255, 255, 255, 0.6);
+    --text-disabled: rgba(255, 255, 255, 0.38);
+    --border-color: rgba(255, 255, 255, 0.23);
+    --border-hover: rgba(255, 255, 255, 0.87);
+    --border-focused: #90caf9;
+    --background-default: #1e1e1e;
+    --background-paper: #2d2d2d;
+    --background-filled: rgba(255, 255, 255, 0.09);
+  }
+
+  .floating-label-float {
+    background: var(--background-default);
+  }
+
+  .floating-password-eye:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .floating-password-eye:active:not(:disabled) {
+    background: rgba(255, 255, 255, 0.16);
+  }
+}
+
+@media (max-width: 600px) {
+  .floating-container {}
+
+  .floating-wrapper {
+    min-height: 48px;
+  }
+
+  .floating-input-element {
+    font-size: 0.875rem;
+  }
+
+  .floating-label {
+    font-size: 0.875rem;
+  }
+
+  .floating-placeholder-label {
+    font-size: 0.875rem;
+  }
+}

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 import MyModal from "../../../components/Elements/MyModal"
 import { useTranslation } from "react-i18next"
-import InputLabel from "../../../components/Elements/InputLabel"
 import { MyToast } from "../../../components/Elements/MyToast"
 import { userApiService } from "../../../api/services/user.api"
+import FloatingInput from "../../../components/Elements/FloatingInput"
 
 function AdminModal(props: any) {
 
@@ -101,52 +101,52 @@ function AdminModal(props: any) {
 
             <div className='mt-4 p-4'>
 
-                <InputLabel
-                    className={"mb-4"}
+                <FloatingInput
+                    containerClassName={"mb-4"}
                     label={t("firstName")}
                     value={selectedUser.firstName || ""}
-                    onChange={(firstName) => setSelectedUser({ ...selectedUser, firstName })}
+                    onChange={(e) => setSelectedUser({ ...selectedUser, firstName: e.target.value })}
+
                 />
 
-
-                <InputLabel
-                    className={"mb-4"}
+                <FloatingInput
+                    containerClassName={"mb-4"}
                     label={t("lastName")}
                     value={selectedUser.lastName || ""}
-                    onChange={(lastName) => setSelectedUser({ ...selectedUser, lastName })}
+                    onChange={(e) => setSelectedUser({ ...selectedUser, lastName: e.target.value })}
                 />
 
 
 
-                <InputLabel
-                    className={"mb-4"}
+                <FloatingInput
+                    containerClassName={"mb-4"}
                     label={t("email")}
                     value={selectedUser.email || ""}
-                    onChange={(email) => setSelectedUser({ ...selectedUser, email })}
+                    onChange={(e) => setSelectedUser({ ...selectedUser, email: e.target.value })}
                 />
 
 
-                <InputLabel
-                    className={"mb-4"}
+                <FloatingInput
+                    containerClassName={"mb-4"}
                     label={t("mobile")}
                     value={selectedUser.mobile || ""}
-                    onChange={(mobile) => setSelectedUser({ ...selectedUser, mobile })}
+                    onChange={(e) => setSelectedUser({ ...selectedUser, mobile: e.target.value })}
                 />
 
 
-                <InputLabel
-                    className={"mb-4"}
+                <FloatingInput
+                    containerClassName={"mb-4"}
                     label={t("password")}
                     value={selectedUser.password || ""}
-                    onChange={(password) => setSelectedUser({ ...selectedUser, password })}
+                    onChange={(e) => setSelectedUser({ ...selectedUser, password: e.target.value })}
                 />
 
 
-                <InputLabel
+                <FloatingInput
                     className={"mb-4"}
                     label={t("confirm_password")}
                     value={selectedUser.confirm_password || ""}
-                    onChange={(confirm_password) => setSelectedUser({ ...selectedUser, confirm_password })}
+                    onChange={(e) => setSelectedUser({ ...selectedUser, confirm_password: e.target.value })}
                 />
 
 

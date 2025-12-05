@@ -6,6 +6,7 @@
     "select_section_required": "انتخاب بخش ضروری است",
     "manage_sections": "مدیریت بخش ها",
     "select_section": "انتخاب بخش",
+    "alert_section_delete": "توجه کنید با حذف این بخش تمامی سوالات متدوال آن نیز حذف میشود",
     "question": "سوال",
     "answer": "پاسخ"
 }

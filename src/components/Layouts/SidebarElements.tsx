@@ -8,6 +8,12 @@ import Protector from '../Protector';
 import { useSelector } from 'react-redux';
 import { IRootState } from '../../store';
 import IconMenuUsers from '../Icon/Menu/IconMenuUsers';
+import IconNotes from '../Icon/IconNotes';
+import IconUser from '../Icon/IconUser';
+import IconMessage from '../Icon/IconMessage';
+import IconMessage2 from '../Icon/IconMessage2';
+import IconFile from '../Icon/IconFile';
+import IconTxtFile from '../Icon/IconTxtFile';
 
 interface SidebarElementsProps {
     currentMenu: string;
@@ -29,7 +35,7 @@ const SidebarElements: React.FC<SidebarElementsProps> = (props) => {
         },
         {
             title: t('sidebar:admin.title'),
-            icon: <IconMenuUsers className="group-hover:!text-primary shrink-0" />,
+            icon: <IconUser className="group-hover:!text-primary shrink-0" fill={true} />,
             children: [
                 {
                     title: t('sidebar:admin.adminList'),
@@ -51,7 +57,7 @@ const SidebarElements: React.FC<SidebarElementsProps> = (props) => {
         },
         {
             title: t('sidebar:faq.title'),
-            icon: <IconMenuUsers className="group-hover:!text-primary shrink-0" />,
+            icon: <IconTxtFile className="group-hover:!text-primary shrink-0" fill={true} duotone={false} />,
             ...FindRouteByName('faq'),
 
         },

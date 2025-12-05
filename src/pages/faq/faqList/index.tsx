@@ -5,10 +5,10 @@ import ConfirmAlert from "../../../components/Elements/ConfirmAlert";
 import { useTranslation } from "react-i18next";
 import { MyToast } from "../../../components/Elements/MyToast";
 import FaqModal from "./FaqModal";
-import InputLabel from "../../../components/Elements/InputLabel";
 import IconPlus from "../../../components/Icon/IconPlus";
 import FaqSectionSelectInput from "../FaqSectionSectionInput";
 import FaqSectionListModal from "../section/FaqListSectionModal";
+import FloatingInput from "../../../components/Elements/FloatingInput";
 
 function FaqList() {
 
@@ -96,21 +96,22 @@ function FaqList() {
             <h1 className='p-4 text-lg font-bold'>{t('faq:faq_list')}</h1>
 
             {/* filters */}
-            <div className='flex flex-wrap justify-between items-center gap-4 p-2 mb-4'>
+            <div className='flex flex-wrap justify-between gap-4 p-2 mb-4'>
 
-                <div className="flex flex-wrap  gap-4">
+                <div className="flex flex-wrap   items-center  gap-4">
 
                     <div className=" flex-1">
 
-                        <InputLabel
+                        <FloatingInput
+                            containerClassName="min-w-[220px] flex-1"
                             value={filters.search}
-                            placeholder={`${t('search')}`}
-                            onChange={(search) => { setFilters({ ...filters, search }) }}
+                            label={`${t('search')}`}
+                            onChange={(e) => { setFilters({ ...filters, search: e.target.value }) }}
 
                         />
                     </div>
 
-                    <div className="min-w-[220px] flex-1 z-50">
+                    <div className="min-w-[220px] flex-1  z-50">
 
                         <FaqSectionSelectInput
                             refresh={refreshState}
@@ -121,8 +122,11 @@ function FaqList() {
 
                 </div>
 
-                <button type="button" className="btn btn-success" onClick={() => setSectionManageModal(true)}>{t("faq:manage_sections")}</button>
-                <button type="button" className="btn btn-primary" onClick={() => setFaqModal(true)}>{t("add")}<IconPlus /></button>
+                <div className="flex gap-4">
+                    <button type="button" className="btn btn-sm btn-success" onClick={() => setSectionManageModal(true)}>{t("faq:manage_sections")}</button>
+                    <button type="button" className="btn btn-sm btn-primary" onClick={() => setFaqModal(true)}>{t("add")}<IconPlus /></button>
+
+                </div>
 
             </div>
 

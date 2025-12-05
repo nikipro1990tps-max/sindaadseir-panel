@@ -9,6 +9,7 @@ import { MyToast } from '../components/Elements/MyToast';
 import { authApiService } from '../api/services/auth.api';
 import IconUser from '../components/Icon/IconUser';
 import { changeUserData } from '../store/appConfigSlice';
+import FloatingInput from '../components/Elements/FloatingInput';
 
 interface LoginStateItems {
     identifier: string | null,
@@ -70,10 +71,10 @@ const LoginPage = () => {
             </div>
 
             <div className="relative flex min-h-screen items-center justify-center bg-[url(/assets/images/auth/map.png)] bg-cover bg-center bg-no-repeat px-6 py-10 dark:bg-[#060818] sm:px-16">
-                <img src="/assets/images/auth/coming-soon-object1.png" alt="image" className="absolute left-0 top-1/2 h-full max-h-[893px] -translate-y-1/2" />
+                {/* <img src="/assets/images/auth/coming-soon-object1.png" alt="image" className="absolute left-0 top-1/2 h-full max-h-[893px] -translate-y-1/2" />
                 <img src="/assets/images/auth/coming-soon-object2.png" alt="image" className="absolute left-24 top-0 h-40 md:left-[30%]" />
                 <img src="/assets/images/auth/coming-soon-object3.png" alt="image" className="absolute right-0 top-0 h-[300px]" />
-                <img src="/assets/images/auth/polygon-object.svg" alt="image" className="absolute bottom-0 end-[28%]" />
+                <img src="/assets/images/auth/polygon-object.svg" alt="image" className="absolute bottom-0 end-[28%]" /> */}
                 <div className="relative w-full max-w-[870px] rounded-md bg-[linear-gradient(45deg,#fff9f9_0%,rgba(255,255,255,0)_25%,rgba(255,255,255,0)_75%,_#fff9f9_100%)] p-2 dark:bg-[linear-gradient(52.22deg,#0E1726_0%,rgba(14,23,38,0)_18.66%,rgba(14,23,38,0)_51.04%,rgba(14,23,38,0)_80.07%,#0E1726_100%)]">
                     <div className="relative flex flex-col justify-center rounded-md bg-white/60 backdrop-blur-lg dark:bg-black/50 px-6 lg:min-h-[758px] py-20">
                         {/* <div className="absolute top-6 end-6">
@@ -123,19 +124,19 @@ const LoginPage = () => {
                                 {/* <p className="text-base font-bold leading-normal text-white-dark">Enter your email and password to login</p> */}
                             </div>
                             <form className="space-y-5 dark:text-white" onSubmit={submitForm}>
-                                <InputLabel
-                                    value={state.identifier}
+                                <FloatingInput
                                     label={t("auth:enter_your_email_or_mobile")}
-                                    placeholder={t("auth:enter_your_email_or_mobile")}
-                                    icon={<IconUser fill={true} />}
-                                    onChange={(value: string | null) => setState({ ...state, identifier: value })}
+                                    value={state.identifier}
+                                    onChange={(e) => setState({ ...state, identifier: e.target.value })}
                                 />
+                        
                                 <div>
-                                    <InputLabelPassword
-                                        value={state.password}
+
+                                    <FloatingInput
                                         label={t("auth:password")}
-                                        placeholder={t("auth:enter_your_password")}
-                                        onChange={(value: string | null) => setState({ ...state, password: value })}
+                                        value={state.password}
+                                        type="password"
+                                        onChange={(e) => setState({ ...state, password: e.target.value })}
                                     />
                                 </div>
                                 {/* <div>

@@ -9,6 +9,7 @@ import InputLabel from '../../../components/Elements/InputLabel';
 import UserModalChangeStatus from '../../../components/User/UserModalChangeStatus';
 import UserModal from './UserModal';
 import UserListTable from './UserListTable';
+import FloatingInput from '../../../components/Elements/FloatingInput';
 
 function UserListPage() {
 
@@ -18,23 +19,23 @@ function UserListPage() {
     const [statusModal, setStatusModal] = useState<any>(null)
     const [openUserModal, setOpenUserModal] = useState<any>(null)
     const [filters, setFilters] = useState({ name: "", page: 1, take: 10 })
-    const [list, setList] = useState({ data: [], count: 0 , isLoading: false })
+    const [list, setList] = useState({ data: [], count: 0, isLoading: false })
 
     async function fetchData() {
 
 
         try {
 
-            setList({ data: [], count: 0 , isLoading : true })
+            setList({ data: [], count: 0, isLoading: true })
 
             const { users, count } = await userApiService.users(filters)
 
-            setList({ data: users, count , isLoading : false })
+            setList({ data: users, count, isLoading: false })
 
         } catch (error) {
             // do something
 
-            setList({ data: [], count: 0 , isLoading : false })
+            setList({ data: [], count: 0, isLoading: false })
 
         }
     }
@@ -122,16 +123,12 @@ function UserListPage() {
             <div className=' flex flex-wrap justify-between items-center gap-4 p-2 mb-4 '>
 
 
-
-                <InputLabel
+                <FloatingInput
                     label={`${t("search_data", { data: `${t("name")}` })}`}
                     value={filters.name}
-                    placeholder={`${t("search_data", { data: `${t("name")}` })}`}
-                    onChange={(name) => { setFilters({ ...filters, name }) }}
-
+                    onChange={(e) => { setFilters({ ...filters, name: e.target.value }) }}
                 />
 
-                {/* <button type="button" className="btn btn-primary" onClick={() => setOpenUserModal(true)}>{t("add")}<IconPlus /></button> */}
             </div>
 
             <div className='w-full mx-5 h-1 bg-black' />

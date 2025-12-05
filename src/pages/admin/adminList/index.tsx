@@ -11,6 +11,7 @@ import InputLabel from '../../../components/Elements/InputLabel';
 import IconPlus from '../../../components/Icon/IconPlus';
 import AdminListTable from './AdminListTable';
 import UserModalChangeStatus from '../../../components/User/UserModalChangeStatus';
+import FloatingInput from '../../../components/Elements/FloatingInput';
 
 function AdminListPage() {
 
@@ -77,7 +78,7 @@ function AdminListPage() {
 
 
     function handleActionClick(key: string, row: any) {
-        
+
         if (key == 'changeStatus') {
             setStatusModal(row)
         } else if (key == 'assignRole') {
@@ -142,13 +143,10 @@ function AdminListPage() {
             {/* filters */}
             <div className='flex flex-wrap justify-between items-center gap-4 p-2 mb-4'>
 
-
-
-                <InputLabel
+                <FloatingInput
                     value={filters.name}
-                    placeholder={`${t('name')}`}
-                    onChange={(name) => { setFilters({ ...filters, name }) }}
-
+                    label={`${t('name')}`}
+                    onChange={(e) => { setFilters({ ...filters, name: e.target.value }) }}
                 />
 
                 <button type="button" className="btn btn-primary" onClick={() => setOpenAdminModal(true)}>{t("add")}<IconPlus /></button>

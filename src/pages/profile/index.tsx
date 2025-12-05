@@ -2,14 +2,13 @@ import { FormEvent, Suspense, useEffect, useState } from 'react';
 import { setPageTitle } from '../../store/themeConfigSlice';
 import { useDispatch } from 'react-redux';;
 import { useTranslation } from 'react-i18next';
-import InputLabel from '../../components/Elements/InputLabel';
 import GenderSelectInput from './GenderSelectInput';
-import InputLabelPassword from '../../components/Elements/InputLabelPassword';
 import { userApiService } from '../../api/services/user.api';
 import PerisanDatePicker from '../../components/Elements/PersianDatePicker';
 import { MyToast } from '../../components/Elements/MyToast';
 import ImageUploadButton from '../../components/Elements/ImageUploadButton';
 import { mediaApiService } from '../../api/services/media.api';
+import FloatingInput from '../../components/Elements/FloatingInput';
 
 const ProfilePage = () => {
     const dispatch = useDispatch();
@@ -151,32 +150,30 @@ const ProfilePage = () => {
 
                             </div>
                             <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-5">
-                                <InputLabel
-                                    placeholder={`${t('enter_data', { data: `${t('user:profile.firstName')}` })}`}
+                                <FloatingInput
                                     label={`${t("user:profile.firstName")}`}
                                     value={user?.firstName || ""}
-                                    onChange={(value) => updateUser("firstName", value)}
+                                    onChange={(e) => updateUser("firstName", e.target.value)}
                                 />
 
-                                <InputLabel
+                                <FloatingInput
                                     label={`${t("user:profile.lastName")}`}
-                                    placeholder={`${t('enter_data', { data: `${t('user:profile.lastName')}` })}`}
                                     value={user?.lastName || ""}
-                                    onChange={(value) => updateUser("lastName", value)}
+                                    onChange={(e) => updateUser("lastName", e.target.value)}
                                 />
 
-                                <InputLabel
+                                <FloatingInput
                                     label={`${t("user:profile.mobile")}`}
                                     placeholder={`${t('enter_data', { data: `${t('user:profile.mobile')}` })}`}
                                     value={user?.mobile || ""}
-                                    onChange={(value) => updateUser("mobile", value)}
+                                    onChange={(e) => updateUser("mobile", e.target.value)}
                                 />
 
-                                <InputLabel
+                                <FloatingInput
                                     label={`${t("user:profile.email")}`}
-                                    placeholder={`${t('enter_data', { data: `${t('user:profile.email')}` })}`}
                                     value={user?.email || ""}
-                                    onChange={(value) => updateUser("email", value)}
+                                    type='email'
+                                    onChange={(e) => updateUser("email", e.target.value)}
                                 />
 
                                 <GenderSelectInput
@@ -190,16 +187,17 @@ const ProfilePage = () => {
                                     onChange={(value: any) => { console.log(999, value); updateUser("birthdate", value) }}
                                 />
 
-                                <InputLabelPassword
+                                <FloatingInput
                                     label={`${t("user:profile.password")}`}
                                     placeholder={`${t("user:profile.password")}`}
-                                    onChange={(value: string) => updateUser("password", value)}
+                                    type='password'
+                                    onChange={(e) => updateUser("password", e.target.value)}
                                 />
 
-                                <InputLabelPassword
+                                <FloatingInput
                                     label={`${t("user:profile.confirm_password")}`}
-                                    placeholder={`${t("user:profile.confirm_password")}`}
-                                    onChange={(value: string) => updateUser("confirm_password", value)}
+                                    type='password'
+                                    onChange={(e) => updateUser("confirm_password", e.target.value)}
                                 />
 
 
