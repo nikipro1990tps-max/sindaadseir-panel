@@ -8,11 +8,6 @@ import { authApiService } from '../api/services/auth.api';
 import { changeUserData } from '../store/appConfigSlice';
 import FloatingInput from '../components/Elements/FloatingInput';
 
-interface LoginStateItems {
-    identifier: string | null,
-    password: string | null
-}
-
 const LoginPage = () => {
 
     const navigate = useNavigate();
@@ -22,7 +17,7 @@ const LoginPage = () => {
     // const isDark = useSelector((state: IRootState) => state.themeConfig.theme === 'dark' || state.themeConfig.isDarkMode);
     // const isRtl = useSelector((state: IRootState) => state.themeConfig.rtlClass) === 'rtl' ? true : false;
     // const themeConfig = useSelector((state: IRootState) => state.themeConfig);
-    const [state, setState] = useState<LoginStateItems>({ identifier: null, password: null });
+    const [state, setState] = useState<any>({ identifier: null, password: null });
     // const setLocale = (flag: string) => {
     //     setFlag(flag);
     //     if (flag.toLowerCase() === 'ae') {
