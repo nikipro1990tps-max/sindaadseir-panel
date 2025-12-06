@@ -78,7 +78,6 @@ const FloatingInput: React.FC<FloatingInputProps> = ({
   const id = useId();
   const inputId = props.id || `floating-input-${id}`;
 
-  // دریافت state از Redux
   const isDark = useSelector((state: IRootState) => state.themeConfig.theme === 'dark' || state.themeConfig.isDarkMode);
   const isRtl = useSelector((state: IRootState) => state.themeConfig.rtlClass) === 'rtl' ? true : false;
 
@@ -97,7 +96,6 @@ const FloatingInput: React.FC<FloatingInputProps> = ({
 
   const hasValue = Boolean(internalValue && internalValue.toString().trim());
   const shouldFloat = isFocused || hasValue;
-  const showPlaceholderAsLabel = !hasValue && !isFocused && placeholder;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setInternalValue(e.target.value);
@@ -138,8 +136,6 @@ const FloatingInput: React.FC<FloatingInputProps> = ({
     }
   };
 
-  // متغیرهای استایل بر اساس تم
-  // تغییر themeStyles برای اضافه کردن کلاس‌های Tailwind
   const themeStyles = {
     light: {
       primary: '#1976d2',
@@ -175,30 +171,11 @@ const FloatingInput: React.FC<FloatingInputProps> = ({
 
   const styles = isDark ? themeStyles.dark : themeStyles.light;
 
-  // کلاس‌های Tailwind
-  const variantClasses = {
-    outlined: '',
-    filled: '',
-    standard: ''
-  };
-
-  const stateClasses = {
-    error: error ? '' : '',
-    disabled: disabled ? 'cursor-not-allowed' : '',
-    readOnly: readOnly ? 'cursor-default' : '',
-    focused: isFocused ? '' : '',
-    hasValue: hasValue ? '' : '',
-  };
-
-  const themeClasses = `${isDark ? 'dark-mode' : 'light-mode'} ${isRtl ? 'rtl' : ''}`;
-  const directionClass = isRtl ? 'rtl' : 'ltr';
-
   const containerClasses = `
     relative
     font-['Inter',_-apple-system,_BlinkMacSystemFont,_'Segoe_UI',_Roboto,_sans-serif]
     ${fullWidth ? 'w-full' : ''}
-    ${themeClasses}
-    ${directionClass}
+    ${isRtl ? 'rtl' : 'ltr'}
     ${containerClassName}
   `.trim();
 
@@ -296,118 +273,86 @@ const FloatingInput: React.FC<FloatingInputProps> = ({
   `.trim();
 
   const labelBaseClasses = `
-  absolute
-  ${isRtl ? 'right-3' : 'left-3'}
-  top-1/2
-  -translate-y-1/2
-  transform
-  ${isDark ? 'text-white/60' : 'text-black/60'}
-  text-base
-  font-normal
-  leading-[1.5]
-  pointer-events-none
-  transition-all
-  duration-200
-  ease-[cubic-bezier(0.4,0,0.2,1)]
-  ${isRtl ? 'origin-right-top' : 'origin-left-top'}
-  whitespace-nowrap
-  overflow-hidden
-  text-ellipsis
-  max-w-[calc(100%-48px)]
-  px-1
-  bg-transparent
-  z-10
-`;
-
-
-  const labelFloatClasses = `
-  -top-2
-  ${isRtl ? 'right-2' : 'left-2'}
-  scale-75
-  ${shouldFloat ? (error ? 'text-red-500' : isDark ? 'text-blue-300' : 'text-blue-600') : (isDark ? 'text-white/60' : 'text-black/60')}
-  ${shouldFloat ? 'font-medium' : 'font-normal'}
-  ${variant === 'outlined' ? (isDark ? 'bg-[#0e1726]' : 'bg-white') :
-      variant === 'filled' ? (isDark ? 'bg-black/10' : 'bg-white') :
-        (isDark ? 'bg-[#1a1a1a]' : 'bg-white')
-    }
-  px-2
-  rounded-sm
-  z-20
-  transition-property: all;
-  transition-duration: 200ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-`;
-
-
-  const labelClasses = `
-    ${labelBaseClasses}
-    ${shouldFloat ? labelFloatClasses : ''}
-    ${disabled ? `text-[${styles.textDisabled}]` : ''}
-    ${labelClassName}
-  `.trim();
-
-  const inputBaseClasses = `
-  w-full
-  border-none
-  outline-none
-  bg-transparent
-  font-inherit
-  text-base
-  font-normal
-  leading-[1.5]
-  text-[${styles.textPrimary}]
-  p-3
-  box-border
-  transition-all
-  duration-200
-  ease-[cubic-bezier(0.4,0,0.2,1)]
-  ${disabled ? `text-[${styles.textDisabled}] opacity-100` : ''}
-  ${readOnly ? 'cursor-default' : ''}
-  ${type === 'password' ? (isRtl ? 'pl-12' : 'pr-12') : ''}
-  placeholder:text-transparent
-  focus:placeholder:text-[${styles.textSecondary}]
-`;
-
-const inputClasses = `
-  ${inputBaseClasses}
-  ${multiline ? 'min-h-[80px] pt-6 pb-2 resize-y' : 'h-full'}
-  ${inputClassName}
-`.trim();
-
-  const placeholderLabelBaseClasses = `
     absolute
-    ${isRtl ? 'right-2' : 'left-2'}
-    top-1/2
+    transform
     -translate-y-1/2
-    text-[${styles.textSecondary}]
-    text-lg
-    font-normal
-    leading-[1.5]
-    pointer-events-none
+    ${isRtl ? 'right-3' : 'left-3'}
+    ${shouldFloat ? (variant === 'outlined' ? '-top-1.5' : '-top-2') : 'top-1/2'}
+    ${shouldFloat ? 'scale-75' : 'scale-100'}
     transition-all
     duration-200
     ease-[cubic-bezier(0.4,0,0.2,1)]
+    pointer-events-none
+    ${shouldFloat ? 'z-10' : 'z-0'}
+    ${shouldFloat ? (isRtl ? 'origin-right-top' : 'origin-left-top') : ''}
     whitespace-nowrap
     overflow-hidden
     text-ellipsis
     max-w-[calc(100%-48px)]
-    opacity-0
+    ${shouldFloat ? 'px-1' : 'px-0'}
   `;
 
-  const placeholderLabelClasses = `
-    ${placeholderLabelBaseClasses}
-    ${showPlaceholderAsLabel ? 'opacity-100' : ''}
-    ${(isFocused || hasValue) ? 'opacity-0' : ''}
+  const labelColorClasses = `
+    ${shouldFloat ? 
+      (error ? 'text-red-500' : (isDark ? 'text-blue-400' : 'text-blue-600')) : 
+      (isDark ? 'text-gray-400' : 'text-gray-500')
+    }
+    ${disabled ? 'text-gray-400' : ''}
+  `;
+
+  const labelBackgroundClasses = `
+    ${shouldFloat ? 
+      (variant === 'outlined' ? (isDark ? 'bg-gray-900' : 'bg-white') :
+       variant === 'filled' ? (isDark ? 'bg-gray-800' : 'bg-gray-50') :
+       (isDark ? 'bg-gray-900' : 'bg-white')) : 
+      'bg-transparent'
+    }
+  `;
+
+  const labelClasses = `
+    ${labelBaseClasses}
+    ${labelColorClasses}
+    ${labelBackgroundClasses}
+    ${labelClassName}
+  `.trim();
+
+  const inputBaseClasses = `
+    w-full
+    h-full
+    border-none
+    outline-none
+    bg-transparent
+    font-inherit
+    text-base
+    font-normal
+    leading-[1.5]
+    ${isDark ? 'text-white' : 'text-gray-900'}
+    ${variant === 'outlined' ? 'px-3 py-4' : 'px-3 pt-6 pb-2'}
+    box-border
+    transition-all
+    duration-200
+    ease-[cubic-bezier(0.4,0,0.2,1)]
+    ${disabled ? 'text-gray-400 cursor-not-allowed' : ''}
+    ${readOnly ? 'cursor-default' : ''}
+    ${type === 'password' ? (isRtl ? 'pl-12' : 'pr-12') : ''}
+    placeholder:text-transparent
+    focus:placeholder:text-gray-400
+  `;
+
+  const inputClasses = `
+    ${inputBaseClasses}
+    ${multiline ? 'min-h-[80px] resize-y' : ''}
+    ${inputClassName}
   `.trim();
 
   const adornmentClasses = `
     flex
     items-center
     justify-center
-    text-[${styles.textSecondary}]
+    ${isDark ? 'text-gray-400' : 'text-gray-500'}
     px-2
     flex-shrink-0
-    ${disabled ? `text-[${styles.textDisabled}]` : ''}
+    ${disabled ? 'text-gray-400' : ''}
   `;
 
   const passwordEyeClasses = `
@@ -419,7 +364,7 @@ const inputClasses = `
     border-none
     p-1
     cursor-pointer
-    text-[${styles.textSecondary}]
+    ${isDark ? 'text-gray-400' : 'text-gray-500'}
     flex
     items-center
     justify-center
@@ -432,11 +377,11 @@ const inputClasses = `
     z-30
     ${disabled || readOnly ? 'cursor-not-allowed opacity-50' : ''}
     ${!disabled && !readOnly ? `
-      hover:bg-[${styles.eyeButtonHover}]
-      hover:text-[${styles.textPrimary}]
-      active:bg-[${styles.eyeButtonActive}]
+      hover:bg-gray-200
+      hover:text-gray-700
+      active:bg-gray-300
       focus:outline-2
-      focus:outline-[${styles.primary}]
+      focus:outline-blue-500
       focus:outline-offset-2
     ` : ''}
   `;
@@ -448,22 +393,22 @@ const inputClasses = `
   `;
 
   const errorTextClasses = `
-    text-[${styles.error}]
+    text-red-500
     text-xs
     font-normal
     leading-[1.66]
   `;
 
   const helperTextClasses = `
-    text-[${styles.textSecondary}]
+    ${isDark ? 'text-gray-400' : 'text-gray-500'}
     text-xs
     font-normal
     leading-[1.66]
-    ${disabled ? `text-[${styles.textDisabled}]` : ''}
+    ${disabled ? 'text-gray-400' : ''}
   `;
 
   const requiredClasses = `
-    text-[${styles.error}]
+    text-red-500
     ml-0.5
   `;
 
@@ -477,7 +422,7 @@ const inputClasses = `
       onChange: handleChange,
       onFocus: handleFocus,
       onBlur: handleBlur,
-      placeholder: placeholder, // همیشه placeholder را نمایش دهید
+      placeholder: placeholder,
       required,
       disabled,
       readOnly,
@@ -524,7 +469,7 @@ const inputClasses = `
         tabIndex={-1}
       >
         <svg
-          className={`transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] text-[${styles.primary}] ${isPasswordVisible ? '' : ''}`}
+          className={`transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] ${isPasswordVisible ? 'text-blue-500' : 'text-gray-500'}`}
           width="20"
           height="20"
           viewBox="0 0 24 24"
@@ -566,12 +511,6 @@ const inputClasses = `
             {label}
             {required && <span className={requiredClasses}> *</span>}
           </label>
-
-          {placeholder && (
-            <div className={placeholderLabelClasses}>
-              {placeholder}
-            </div>
-          )}
 
           {type === 'password' && renderPasswordEyeIcon()}
         </div>
