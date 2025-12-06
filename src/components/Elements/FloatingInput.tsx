@@ -278,7 +278,7 @@ const FloatingInput: React.FC<FloatingInputProps> = ({
     -translate-y-1/2
     ${isRtl ? 'right-3' : 'left-3'}
     ${shouldFloat ? (variant === 'outlined' ? '-top-1.5' : '-top-2') : 'top-1/2'}
-    ${shouldFloat ? 'scale-75' : 'scale-100'}
+    ${shouldFloat ? 'scale-90' : 'scale-100'}
     transition-all
     duration-200
     ease-[cubic-bezier(0.4,0,0.2,1)]
