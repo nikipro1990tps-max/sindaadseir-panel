@@ -1,26 +1,43 @@
 import { MyToast } from "../components/Elements/MyToast";
 import axiosInstance from "./axiosConfig";
+import { AxiosError, isCancel } from "axios";
 
-let abortController: any;
-
+let abortController: AbortController | null = null;
 
 const axiosApiCall = {
 
     async get(url: string, filters = {}) {
 
-
-        if (!abortController) {
-            abortController = new AbortController()
+        // لغو درخواست قبلی اگر وجود داشته باشد
+        if (abortController) {
+            abortController.abort();
+            abortController = null;
         }
+
+        // ایجاد کنترلر جدید برای درخواست فعلی
+        abortController = new AbortController();
 
         try {
             const response = await axiosInstance.get(url, {
                 params: filters,
                 signal: abortController.signal,
-
             })
             return response.data.result
         } catch (error) {
+            // بررسی اینکه آیا درخواست لغو شده است
+            const isCanceled = 
+                isCancel(error) ||
+                (error instanceof AxiosError && error.code === 'ERR_CANCELED') ||
+                (error instanceof AxiosError && error.name === 'CanceledError') ||
+                (error instanceof AxiosError && error.message?.toLowerCase().includes('cancel'));
+            
+            // اگر درخواست لغو شده باشد، toast نمایش نده
+            if (isCanceled) {
+                // درخواست لغو شده است - خطا را throw کن اما toast نمایش نده
+                throw error;
+            }
+            
+            // برای سایر خطاها، toast نمایش بده
             MyToast.error(error)
             throw error
         }
