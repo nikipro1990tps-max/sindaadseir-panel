@@ -155,9 +155,6 @@ const FloatingInput: React.FC<FloatingInputProps> = ({
       backgroundFilled: 'rgba(0, 0, 0, 0.06)',
       eyeButtonHover: 'rgba(0, 0, 0, 0.04)',
       eyeButtonActive: 'rgba(0, 0, 0, 0.08)',
-      // اضافه کردن کلاس‌های Tailwind
-      bgDefaultClass: 'bg-white/95',
-      bgFilledClass: 'bg-black/6',
     },
     dark: {
       primary: '#90caf9',
@@ -173,9 +170,6 @@ const FloatingInput: React.FC<FloatingInputProps> = ({
       backgroundFilled: 'rgba(0, 0, 0, 0.06)',
       eyeButtonHover: 'rgba(255, 255, 255, 0.08)',
       eyeButtonActive: 'rgba(255, 255, 255, 0.16)',
-      // اضافه کردن کلاس‌های Tailwind
-      bgDefaultClass: 'bg-[#0e1726]/95',
-      bgFilledClass: 'bg-black/6',
     }
   };
 
@@ -303,9 +297,10 @@ const FloatingInput: React.FC<FloatingInputProps> = ({
 
   const labelBaseClasses = `
   absolute
-  ${isRtl ? 'right-0' : 'left-0'}
+  ${isRtl ? 'right-3' : 'left-3'}
   top-1/2
   -translate-y-1/2
+  transform
   ${isDark ? 'text-white/60' : 'text-black/60'}
   text-base
   font-normal
@@ -319,29 +314,30 @@ const FloatingInput: React.FC<FloatingInputProps> = ({
   overflow-hidden
   text-ellipsis
   max-w-[calc(100%-48px)]
-  px-2
+  px-1
   bg-transparent
   z-10
 `;
 
 
-// یا اگر می‌خواهید variantها را هم پشتیبانی کنید:
-const labelFloatClasses = `
-  -top-1.5
-  scale-90
-  ${shouldFloat ? (error ? 'text-[#f44336]' : isDark ? 'text-[#90caf9]' : 'text-[#1976d2]') : (isDark ? 'text-white/60' : 'text-black/60')}
+  const labelFloatClasses = `
+  -top-2
+  ${isRtl ? 'right-2' : 'left-2'}
+  scale-75
+  ${shouldFloat ? (error ? 'text-red-500' : isDark ? 'text-blue-300' : 'text-blue-600') : (isDark ? 'text-white/60' : 'text-black/60')}
   ${shouldFloat ? 'font-medium' : 'font-normal'}
-  ${
-    variant === 'outlined' ? styles.bgDefaultClass : 
-    variant === 'filled' ? styles.bgFilledClass : 
-    isDark ? 'bg-[#1a1a1a]/95' : 'bg-white/95'
-  }
-  backdrop-blur-sm
-  px-1
+  ${variant === 'outlined' ? (isDark ? 'bg-[#0e1726]' : 'bg-white') :
+      variant === 'filled' ? (isDark ? 'bg-black/10' : 'bg-white') :
+        (isDark ? 'bg-[#1a1a1a]' : 'bg-white')
+    }
+  px-2
   rounded-sm
-  ${isRtl ? 'mr-[calc(8px-4px)]' : 'ml-[calc(8px-4px)]'}
   z-20
+  transition-property: all;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 `;
+
 
   const labelClasses = `
     ${labelBaseClasses}
@@ -351,31 +347,32 @@ const labelFloatClasses = `
   `.trim();
 
   const inputBaseClasses = `
-    w-full
-    border-none
-    outline-none
-    bg-transparent
-    font-inherit
-    text-base
-    font-normal
-    leading-[1.5]
-    mt-2
-    text-[${styles.textPrimary}]
-    p-1
-    box-border
-    transition-all
-    duration-200
-    ease-[cubic-bezier(0.4,0,0.2,1)]
-    ${disabled ? `text-[${styles.textDisabled}] opacity-100` : ''}
-    ${readOnly ? 'cursor-default' : ''}
-    ${type === 'password' ? (isRtl ? 'pl-12' : 'pr-12') : ''}
-  `;
+  w-full
+  border-none
+  outline-none
+  bg-transparent
+  font-inherit
+  text-base
+  font-normal
+  leading-[1.5]
+  text-[${styles.textPrimary}]
+  p-3
+  box-border
+  transition-all
+  duration-200
+  ease-[cubic-bezier(0.4,0,0.2,1)]
+  ${disabled ? `text-[${styles.textDisabled}] opacity-100` : ''}
+  ${readOnly ? 'cursor-default' : ''}
+  ${type === 'password' ? (isRtl ? 'pl-12' : 'pr-12') : ''}
+  placeholder:text-transparent
+  focus:placeholder:text-[${styles.textSecondary}]
+`;
 
-  const inputClasses = `
-    ${inputBaseClasses}
-    ${multiline ? 'min-h-[32px] pt-6 pb-2  resize-y' : 'h-full'}
-    ${inputClassName}
-  `.trim();
+const inputClasses = `
+  ${inputBaseClasses}
+  ${multiline ? 'min-h-[80px] pt-6 pb-2 resize-y' : 'h-full'}
+  ${inputClassName}
+`.trim();
 
   const placeholderLabelBaseClasses = `
     absolute
@@ -480,7 +477,7 @@ const labelFloatClasses = `
       onChange: handleChange,
       onFocus: handleFocus,
       onBlur: handleBlur,
-      placeholder: isFocused ? placeholder : '',
+      placeholder: placeholder, // همیشه placeholder را نمایش دهید
       required,
       disabled,
       readOnly,
