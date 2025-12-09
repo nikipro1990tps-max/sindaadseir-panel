@@ -77,7 +77,7 @@ const Header = () => {
 
                         <Link to="/user-profile" className="main-logo ring-2 flex items-center shrink-0">
                             <img className="w-8 ltr:-ml-1 rtl:-mr-1 inline" src={user.avatar || "/assets/images/auth/user.png"} alt="logo" />
-                            <span className="text-2xl ltr:ml-1.5 rtl:mr-1.5  font-semibold  align-middle hidden md:inline dark:text-white-light transition-all duration-300">VRISTO</span>
+                            <span className="text-2xl ltr:ml-1.5 rtl:mr-1.5  font-semibold  align-middle hidden md:inline dark:text-white-light transition-all duration-300">{t("APP_NAME")}</span>
                         </Link>
 
                         <button

@@ -9,7 +9,7 @@ export const authApiService = {
 
     async checkLogin() {
 
-        return await axiosApiCall.get("/user/auth/admin")
+        return await axiosApiCall.post("/user/auth/admin")
 
     },
 

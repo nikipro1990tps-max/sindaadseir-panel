@@ -1,4 +1,5 @@
 {
+    "APP_NAME": "سینداد سیر",
     "dashboard": "داشبورد",
     "required_data": "وارد کردن {{data}} الزامی است",
     "success_action": "عملیات با موفقیت انجام شد",
