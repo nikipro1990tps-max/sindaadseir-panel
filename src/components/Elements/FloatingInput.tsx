@@ -320,7 +320,7 @@ const FloatingInput: React.FC<FloatingInputProps> = ({
     font-normal
     leading-[1.5]
     ${isDark ? 'text-white' : 'text-gray-900'}
-    ${variant === 'outlined' ? 'px-3 py-4' : 'px-3 pt-6 pb-2'}
+    ${variant === 'outlined' ? 'p-3' : 'px-3 pt-6 pb-2'}
     box-border
     transition-all
     duration-200
