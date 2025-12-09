@@ -111,7 +111,7 @@ function FaqList() {
                         />
                     </div>
 
-                    <div className="min-w-[220px] flex-1  z-50">
+                    <div className="min-w-[220px] flex-1  z-10">
 
                         <FaqSectionSelectInput
                             refresh={refreshState}
