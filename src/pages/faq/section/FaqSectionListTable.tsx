@@ -22,7 +22,7 @@ function FaqSectionListTable(props: FaqSectionListTableProps) {
         list = null,
         total = 0,
         page = 1,
-        take = 8,
+        take = 10,
         handleActionClick = (action: string, row: any) => { },
         onChangeFilters = (filters: any) => { }
     } = props
@@ -62,7 +62,7 @@ function FaqSectionListTable(props: FaqSectionListTableProps) {
                         textAlignment: `${isRtl ? "right" : "left"}`,
                         // sortable: true,
                         render: ({ title }) => (
-                            <p className='text-center dark:text-white text-black truncate max-w-[200px]'>{title}</p>
+                            <p className={`${isRtl ? "right" : "left"} dark:text-white text-black truncate max-w-[200px]`}>{title}</p>
                         ),
                     },
                     {
@@ -71,7 +71,7 @@ function FaqSectionListTable(props: FaqSectionListTableProps) {
                         textAlignment: `${isRtl ? "right" : "left"}`,
                         // sortable: true,
                         render: ({ description }) => (
-                            <p className='text-center dark:text-white text-black truncate max-w-[100px]'>{description}</p>
+                            <p className={`${isRtl ? "right" : "left"} dark:text-white text-black truncate max-w-[200px]`}>{description}</p>
                         ),
                     },
                     {

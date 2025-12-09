@@ -101,7 +101,7 @@ function FaqSectionListModal(props: any) {
                     list={list.sections}
                     total={list.count}
                     page={filters.page}
-                    take={filters.page}
+                    take={filters.take}
                     handleActionClick={(action, row) => { handleActionClick(action, row) }}
                     onChangeFilters={(filters) => { setFilters({ ...filters }) }}
 

@@ -62,7 +62,7 @@ function FaqListTable(props: FaqListTableProps) {
                         textAlignment: `${isRtl ? "right" : "left"}`,
                         // sortable: true,
                         render: ({ question }) => (
-                            <p className='text-center dark:text-white text-black truncate max-w-[200px]'>{question}</p>
+                            <p className={`${isRtl ? "right" : "left"} dark:text-white text-black truncate max-w-[200px]`}>{question}</p>
                         ),
                     },
                     {
@@ -71,7 +71,7 @@ function FaqListTable(props: FaqListTableProps) {
                         textAlignment: `${isRtl ? "right" : "left"}`,
                         // sortable: true,
                         render: ({ answer }) => (
-                            <p className='text-center dark:text-white text-black truncate max-w-[100px]'>{answer}</p>
+                            <p className={`${isRtl ? "right" : "left"} dark:text-white text-black truncate max-w-[100px]`}>{answer}</p>
                         ),
                     },
                     {
